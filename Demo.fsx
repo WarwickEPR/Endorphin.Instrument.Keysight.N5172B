@@ -4,6 +4,7 @@
 // for more guidance on F# programming.
 
 #r @"..\packages\log4net.2.0.3\lib\net40-full\log4net.dll"
+#r "../Endorphin.Utilities/bin/Debug/Endorphin.Utilities.dll"
 #r @"..\Endorphin.Core\bin\Debug\Endorphin.Core.dll"
 #r @"bin\Debug\Endorphin.Instrument.KeysightRfSource.dll"
 

@@ -4,4 +4,5 @@
 #r "System.Core.dll"
 #r "System.dll"
 #r "System.Numerics.dll"
-#r "../../Endorphin.Core/bin/Debug/Endorphin.Core.dll"
+#r "../../Endorphin.Core/bin/Release/Endorphin.Core.dll"
+#r "../../Endorphin.Utilities/bin/Release/Endorphin.Utilities.dll"
