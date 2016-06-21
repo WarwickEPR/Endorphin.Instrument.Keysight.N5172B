@@ -30,7 +30,7 @@ let functionSource frequency = InternalSource ( Function1,
                                                   PhaseOffset = Phase_rad 0.0<rad> } )
 
 let test = { Depth = depthInPercentage (Percentage 50.0<pct>) }
- 
+
 let am = AmplitudeModulation (AM1, { Depth = depthInPercentage (Percentage 50.0<pct>) }, ext1)
 let fm = FrequencyModulation (FM2, { Deviation = Frequency_Hz 2.0e3<Hz> }, fun2)
 
@@ -48,7 +48,7 @@ let sweepExperiment startFrequency stopFrequency =
             frequencyStepSweepInHz startFrequency stopFrequency
             |> withPoints 200
             |> withFixedPowerInDbm -3.0<dBm>
-            |> withDwellTime (Some (Duration_sec 1e-2<s>))   
+            |> withDwellTime (Some (Duration_sec 1e-2<s>))
 
         printfn "\nSetting up experiment:\n%A" sweepSettings
 //        do! Sweep.Apply.stepSweep keysight sweepSettings
@@ -64,8 +64,8 @@ let sweepExperiment startFrequency stopFrequency =
         do! RfSource.applySettings keysight keysightRfSettings1
 
         //let! amplitude = queryCwAmplitude keysight
-        //printfn "%A" amplitude 
-        
+        //printfn "%A" amplitude
+
         do! RfSource.closeInstrument keysight }
 
 
