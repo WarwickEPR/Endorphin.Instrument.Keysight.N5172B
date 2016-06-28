@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Configure - Endorphin.Core</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content=""/>
+    <meta name="author" content="University of Warwick EPR and Diamond group"/>
+
+    <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
+    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet"/>
+
+    <link type="text/css" rel="stylesheet" href="/Endorphin.Core/content/style.css" />
+    <script type="text/javascript" src="/Endorphin.Core/content/tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="container">
+      <div class="masthead">
+        <ul class="nav nav-pills pull-right">
+          <li><a href="http://fsharp.org">fsharp.org</a></li>
+          <li><a href="http://github.com/anton-pt/Endorphin.Core">github page</a></li>
+        </ul>
+        <h3 class="muted"><a href="/Endorphin.Core/index.html">Endorphin.Core</a></h3>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="span9" id="main">
+          
+
+
+
+<h1>Configure</h1>
+<p>
+  <span>Namespace: Endorphin.Instrument.Keysight.N5172B</span><br />
+  <span>Parent Module: <a href="endorphin-instrument-keysight-n5172b-sweep.html">Sweep</a></span>
+</p>
+<div class="xmldoc">
+<p>Build a configuration using the data model.</p>
+
+</div>
+
+<!-- Render nested types and modules, if there are any -->
+
+  <h3>Functions and values</h3>
+  <table class="table table-bordered member-list">
+    <thead>
+      <tr><td>Function or value</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '145', 145)" onmouseover="showTip(event, '145', 145)">
+            fixedFrequencyInHz frequency
+          </code>
+          <div class="tip" id="145">
+            <strong>Signature:</strong> frequency:float&lt;MeasureProduct&lt;Hz,MeasureOne&gt;&gt; -&gt; FrequencySweep<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/anton-pt/Endorphin.Core/tree/master/src/Endorphin.Instrument.Keysight.N5172B/Sweep.fs#L356-356" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Create a fixed frequency value in Hz.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '146', 146)" onmouseover="showTip(event, '146', 146)">
+            fixedPowerInDbm power
+          </code>
+          <div class="tip" id="146">
+            <strong>Signature:</strong> power:float&lt;MeasureProduct&lt;dBm,MeasureOne&gt;&gt; -&gt; AmplitudeSweep<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/anton-pt/Endorphin.Core/tree/master/src/Endorphin.Instrument.Keysight.N5172B/Sweep.fs#L351-351" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Create an absolute value of fixed amplitude.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '147', 147)" onmouseover="showTip(event, '147', 147)">
+            frequencyStepSweepInHz start finish
+          </code>
+          <div class="tip" id="147">
+            <strong>Signature:</strong> start:float&lt;MeasureProduct&lt;Hz,MeasureOne&gt;&gt; -&gt; finish:float&lt;MeasureProduct&lt;Hz,MeasureOne&gt;&gt; -&gt; StepSweep<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/anton-pt/Endorphin.Core/tree/master/src/Endorphin.Instrument.Keysight.N5172B/Sweep.fs#L418-418" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Create a step sweep with a frequency sweep between the specified start and end frequencies,
+measured in Hz.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '148', 148)" onmouseover="showTip(event, '148', 148)">
+            frequencySweepInHz a b
+          </code>
+          <div class="tip" id="148">
+            <strong>Signature:</strong> a:float&lt;MeasureProduct&lt;Hz,MeasureOne&gt;&gt; -&gt; b:float&lt;MeasureProduct&lt;Hz,MeasureOne&gt;&gt; -&gt; FrequencySweep<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/anton-pt/Endorphin.Core/tree/master/src/Endorphin.Instrument.Keysight.N5172B/Sweep.fs#L358-358" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Create a frequency sweep between two values of frequency, both in Hz.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '149', 149)" onmouseover="showTip(event, '149', 149)">
+            powerStepSweepInDbm start finish
+          </code>
+          <div class="tip" id="149">
+            <strong>Signature:</strong> start:float&lt;MeasureProduct&lt;dBm,MeasureOne&gt;&gt; -&gt; finish:float&lt;MeasureProduct&lt;dBm,MeasureOne&gt;&gt; -&gt; StepSweep<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/anton-pt/Endorphin.Core/tree/master/src/Endorphin.Instrument.Keysight.N5172B/Sweep.fs#L422-422" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Create a step sweep with an amplitude sweep between the specified start and end
+absolute amplitudes, measured in dBm.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '150', 150)" onmouseover="showTip(event, '150', 150)">
+            powerSweepInDbm a b
+          </code>
+          <div class="tip" id="150">
+            <strong>Signature:</strong> a:float&lt;MeasureProduct&lt;dBm,MeasureOne&gt;&gt; -&gt; b:float&lt;MeasureProduct&lt;dBm,MeasureOne&gt;&gt; -&gt; AmplitudeSweep<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/anton-pt/Endorphin.Core/tree/master/src/Endorphin.Instrument.Keysight.N5172B/Sweep.fs#L353-353" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Create an amplitude sweep between two values, both in absolute dBm.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '151', 151)" onmouseover="showTip(event, '151', 151)">
+            withAttenuationProtection state config
+          </code>
+          <div class="tip" id="151">
+            <strong>Signature:</strong> state:OnOffState -&gt; config:StepSweep -&gt; StepSweep<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/anton-pt/Endorphin.Core/tree/master/src/Endorphin.Instrument.Keysight.N5172B/Sweep.fs#L407-407" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Create a step sweep with attenuation protection set to the specified state.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '152', 152)" onmouseover="showTip(event, '152', 152)">
+            withDirection direction config
+          </code>
+          <div class="tip" id="152">
+            <strong>Signature:</strong> direction:Direction -&gt; config:StepSweep -&gt; StepSweep<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/anton-pt/Endorphin.Core/tree/master/src/Endorphin.Instrument.Keysight.N5172B/Sweep.fs#L387-387" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Create a step sweep with the given sweep direction.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '153', 153)" onmouseover="showTip(event, '153', 153)">
+            withDwellTime time config
+          </code>
+          <div class="tip" id="153">
+            <strong>Signature:</strong> time:Duration option -&gt; config:StepSweep -&gt; StepSweep<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/anton-pt/Endorphin.Core/tree/master/src/Endorphin.Instrument.Keysight.N5172B/Sweep.fs#L391-391" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Create a step sweep with the given sweep dwell time.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '154', 154)" onmouseover="showTip(event, '154', 154)">
+            withFixedFrequencyInHz frequency config
+          </code>
+          <div class="tip" id="154">
+            <strong>Signature:</strong> frequency:float&lt;MeasureProduct&lt;Hz,MeasureOne&gt;&gt; -&gt; config:StepSweep -&gt; StepSweep<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/anton-pt/Endorphin.Core/tree/master/src/Endorphin.Instrument.Keysight.N5172B/Sweep.fs#L414-414" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Create a step sweep with a fixed frequency in Hz.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '155', 155)" onmouseover="showTip(event, '155', 155)">
+            withFixedPowerInDbm power config
+          </code>
+          <div class="tip" id="155">
+            <strong>Signature:</strong> power:float&lt;MeasureProduct&lt;dBm,MeasureOne&gt;&gt; -&gt; config:StepSweep -&gt; StepSweep<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/anton-pt/Endorphin.Core/tree/master/src/Endorphin.Instrument.Keysight.N5172B/Sweep.fs#L411-411" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Create a step sweep with a fixed absolute power in dBm.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '156', 156)" onmouseover="showTip(event, '156', 156)">
+            withListTrigger trigger config
+          </code>
+          <div class="tip" id="156">
+            <strong>Signature:</strong> trigger:TriggerSource option -&gt; config:StepSweep -&gt; StepSweep<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/anton-pt/Endorphin.Core/tree/master/src/Endorphin.Instrument.Keysight.N5172B/Sweep.fs#L399-399" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Create a step sweep with a given list trigger source.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '157', 157)" onmouseover="showTip(event, '157', 157)">
+            withPoints points config
+          </code>
+          <div class="tip" id="157">
+            <strong>Signature:</strong> points:int -&gt; config:StepSweep -&gt; StepSweep<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/anton-pt/Endorphin.Core/tree/master/src/Endorphin.Instrument.Keysight.N5172B/Sweep.fs#L381-381" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Create a step sweep with the given points.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '158', 158)" onmouseover="showTip(event, '158', 158)">
+            withRetrace state config
+          </code>
+          <div class="tip" id="158">
+            <strong>Signature:</strong> state:OnOffState -&gt; config:StepSweep -&gt; StepSweep<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/anton-pt/Endorphin.Core/tree/master/src/Endorphin.Instrument.Keysight.N5172B/Sweep.fs#L403-403" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Create a step sweep with retracing set to the specified state.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '159', 159)" onmouseover="showTip(event, '159', 159)">
+            withSpacing spacing config
+          </code>
+          <div class="tip" id="159">
+            <strong>Signature:</strong> spacing:StepSpacing -&gt; config:StepSweep -&gt; StepSweep<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/anton-pt/Endorphin.Core/tree/master/src/Endorphin.Instrument.Keysight.N5172B/Sweep.fs#L384-384" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Create a step sweep with the given spacing.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '160', 160)" onmouseover="showTip(event, '160', 160)">
+            withStepTrigger trigger config
+          </code>
+          <div class="tip" id="160">
+            <strong>Signature:</strong> trigger:TriggerSource option -&gt; config:StepSweep -&gt; StepSweep<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/anton-pt/Endorphin.Core/tree/master/src/Endorphin.Instrument.Keysight.N5172B/Sweep.fs#L395-395" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Create a step sweep with a given step trigger source.</p>
+
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+        </div>
+        <div class="span3">
+          <img src="/Endorphin.Core/img/logo.png" alt="F# Project" style="width:150px;margin:10px" />  
+          <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
+            <li class="nav-header">Endorphin.Core</li>
+            <li><a href="/Endorphin.Core/index.html">Home page</a></li>
+            <li class="divider"></li>
+            <li><a href="http://nuget.org/packages/Endorphin.Core">Get Library via NuGet</a></li>
+            <li><a href="http://github.com/anton-pt/Endorphin.Core">Source Code on GitHub</a></li>
+            <li><a href="/Endorphin.Core/license.html">License</a></li>
+            <li><a href="/Endorphin.Core/release-notes.html">Release Notes</a></li>
+            
+            <li class="nav-header">Getting started</li>
+            <li><a href="/Endorphin.Core/tutorial.html">Sample tutorial</a></li>
+
+            <li class="nav-header">Documentation</li>
+            <li><a href="/Endorphin.Core/reference/index.html">API Reference</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <a href="http://github.com/anton-pt/Endorphin.Core"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"/></a>
+  </body>
+  </html>

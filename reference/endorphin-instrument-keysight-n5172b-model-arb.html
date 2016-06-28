@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>ARB - Endorphin.Core</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content=""/>
+    <meta name="author" content="University of Warwick EPR and Diamond group"/>
+
+    <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
+    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet"/>
+
+    <link type="text/css" rel="stylesheet" href="/Endorphin.Core/content/style.css" />
+    <script type="text/javascript" src="/Endorphin.Core/content/tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="container">
+      <div class="masthead">
+        <ul class="nav nav-pills pull-right">
+          <li><a href="http://fsharp.org">fsharp.org</a></li>
+          <li><a href="http://github.com/anton-pt/Endorphin.Core">github page</a></li>
+        </ul>
+        <h3 class="muted"><a href="/Endorphin.Core/index.html">Endorphin.Core</a></h3>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="span9" id="main">
+          
+
+
+
+<h1>ARB</h1>
+<p>
+  <span>Namespace: Endorphin.Instrument.Keysight.N5172B</span><br />
+  <span>Parent Module: <a href="endorphin-instrument-keysight-n5172b-model.html">Model</a></span>
+</p>
+<div class="xmldoc">
+</div>
+
+<!-- Render nested types and modules, if there are any -->
+  <h2>Nested types and modules</h2>
+  <div>
+      <table class="table table-bordered type-list">
+    <thead>
+      <tr><td>Type</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td class="type-name">
+            <a href="endorphin-instrument-keysight-n5172b-model-arb-arbcontinuousmode.html">ArbContinuousMode</a>
+          </td>
+          <td class="xmldoc"><p>The mode of a continuous trigger in the dual ARB system.  "Free" means that playback begins
+immediately once the ARB is turned on, without waiting for a trigger, then repeats that
+waveform until something tells it to stop, and ignore subsequent triggers.  "Trigger" does
+the same, but waits for an initial trigger.  "Reset" is like "Trigger", but subsequent triggers
+reset the waveform to the beginning.</p>
+
+</td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="endorphin-instrument-keysight-n5172b-model-arb-arbexternalconnector.html">ArbExternalConnector</a>
+          </td>
+          <td class="xmldoc"><p>Physical location of the external source for the dual ARB system triggering.</p>
+
+</td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="endorphin-instrument-keysight-n5172b-model-arb-arbretriggermode.html">ArbRetriggerMode</a>
+          </td>
+          <td class="xmldoc"><p>The behaviour of the system when a second trigger is received while in single trigger mode.
+"No retrigger" ignores all subsequent triggers. "Buffered retrigger" plays the segment again
+once it has finished. "Restart retrigger" immediately resets the segment to the beginning and
+starts it.</p>
+
+</td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="endorphin-instrument-keysight-n5172b-model-arb-arbsegmentadvancemode.html">ArbSegmentAdvanceMode</a>
+          </td>
+          <td class="xmldoc"><p>The mode of a segment advance type trigger in the dual ARB system.  "Single" means that on
+trigger, the next segment in the sequence plays once, ignoring the repetition count listed in
+its sequence.  Sequence repetitions are NOT ignored.  "Continuous" means that the segment plays
+in a loop until the next trigger moves it on.  This also ignores the repetition count of the
+segment.</p>
+
+</td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="endorphin-instrument-keysight-n5172b-model-arb-arbtrigger.html">ArbTrigger</a>
+          </td>
+          <td class="xmldoc"><p>Complete triggering information for the dual ARB system.</p>
+
+</td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="endorphin-instrument-keysight-n5172b-model-arb-arbtriggermode.html">ArbTriggerMode</a>
+          </td>
+          <td class="xmldoc"><p>The type of triggering to use for the dual ARB system.</p>
+
+</td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="endorphin-instrument-keysight-n5172b-model-arb-arbtriggersource.html">ArbTriggerSource</a>
+          </td>
+          <td class="xmldoc"><p>The source to use to trigger the dual ARB system.</p>
+
+</td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="endorphin-instrument-keysight-n5172b-model-arb-lowhighstate.html">LowHighState</a>
+          </td>
+          <td class="xmldoc"><p>A state which can either be low or high.</p>
+
+</td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="endorphin-instrument-keysight-n5172b-model-arb-markers.html">Markers</a>
+          </td>
+          <td class="xmldoc"><p>A record of the 4 markers' states.</p>
+
+</td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="endorphin-instrument-keysight-n5172b-model-arb-sample.html">Sample</a>
+          </td>
+          <td class="xmldoc"><p>A single IQ point with associated markers.</p>
+
+</td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="endorphin-instrument-keysight-n5172b-model-arb-segment.html">Segment</a>
+          </td>
+          <td class="xmldoc"><p>A single segment in the machine.  Must be at least 60 samples long.</p>
+
+</td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="endorphin-instrument-keysight-n5172b-model-arb-sequence.html">Sequence</a>
+          </td>
+          <td class="xmldoc"><p>A single sequence in the machine - can contain other waveforms.</p>
+
+</td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="endorphin-instrument-keysight-n5172b-model-arb-storedwaveform.html">StoredWaveform</a>
+          </td>
+          <td class="xmldoc"><p>A waveform stored on the machine.</p>
+
+</td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="endorphin-instrument-keysight-n5172b-model-arb-waveform.html">Waveform</a>
+          </td>
+          <td class="xmldoc"><p>A unified type representing some playable waveform on the machine.</p>
+
+</td>
+        </tr>
+    </tbody>
+  </table>
+
+  </div>
+
+
+        </div>
+        <div class="span3">
+          <img src="/Endorphin.Core/img/logo.png" alt="F# Project" style="width:150px;margin:10px" />  
+          <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
+            <li class="nav-header">Endorphin.Core</li>
+            <li><a href="/Endorphin.Core/index.html">Home page</a></li>
+            <li class="divider"></li>
+            <li><a href="http://nuget.org/packages/Endorphin.Core">Get Library via NuGet</a></li>
+            <li><a href="http://github.com/anton-pt/Endorphin.Core">Source Code on GitHub</a></li>
+            <li><a href="/Endorphin.Core/license.html">License</a></li>
+            <li><a href="/Endorphin.Core/release-notes.html">Release Notes</a></li>
+            
+            <li class="nav-header">Getting started</li>
+            <li><a href="/Endorphin.Core/tutorial.html">Sample tutorial</a></li>
+
+            <li class="nav-header">Documentation</li>
+            <li><a href="/Endorphin.Core/reference/index.html">API Reference</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <a href="http://github.com/anton-pt/Endorphin.Core"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"/></a>
+  </body>
+  </html>

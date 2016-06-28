@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Control - Endorphin.Core</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content=""/>
+    <meta name="author" content="University of Warwick EPR and Diamond group"/>
+
+    <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
+    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet"/>
+
+    <link type="text/css" rel="stylesheet" href="/Endorphin.Core/content/style.css" />
+    <script type="text/javascript" src="/Endorphin.Core/content/tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="container">
+      <div class="masthead">
+        <ul class="nav nav-pills pull-right">
+          <li><a href="http://fsharp.org">fsharp.org</a></li>
+          <li><a href="http://github.com/anton-pt/Endorphin.Core">github page</a></li>
+        </ul>
+        <h3 class="muted"><a href="/Endorphin.Core/index.html">Endorphin.Core</a></h3>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="span9" id="main">
+          
+
+
+
+<h1>Control</h1>
+<p>
+  <span>Namespace: Endorphin.Instrument.Keysight.N5172B</span><br />
+  <span>Parent Module: <a href="endorphin-instrument-keysight-n5172b-sweep.html">Sweep</a></span>
+</p>
+<div class="xmldoc">
+</div>
+
+<!-- Render nested types and modules, if there are any -->
+  <h2>Nested types and modules</h2>
+  <div>
+      <table class="table table-bordered module-list">
+    <thead>
+      <tr><td>Module</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td class="module-name">
+            <a href="endorphin-instrument-keysight-n5172b-sweep-control-amplitude.html">Amplitude</a>
+          </td>
+          <td class="xmldoc"></td>
+        </tr>
+        <tr>
+          <td class="module-name">
+            <a href="endorphin-instrument-keysight-n5172b-sweep-control-frequency.html">Frequency</a>
+          </td>
+          <td class="xmldoc"></td>
+        </tr>
+        <tr>
+          <td class="module-name">
+            <a href="endorphin-instrument-keysight-n5172b-sweep-control-list.html">List</a>
+          </td>
+          <td class="xmldoc"></td>
+        </tr>
+        <tr>
+          <td class="module-name">
+            <a href="endorphin-instrument-keysight-n5172b-sweep-control-step.html">Step</a>
+          </td>
+          <td class="xmldoc"></td>
+        </tr>
+    </tbody>
+  </table>
+
+  </div>
+
+  <h3>Functions and values</h3>
+  <table class="table table-bordered member-list">
+    <thead>
+      <tr><td>Function or value</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '161', 161)" onmouseover="showTip(event, '161', 161)">
+            queryAttenuationProtection 
+          </code>
+          <div class="tip" id="161">
+            <strong>Signature:</strong> RfSource -&gt; Async&lt;OnOffState&gt;<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/anton-pt/Endorphin.Core/tree/master/src/Endorphin.Instrument.Keysight.N5172B/Sweep.fs#L165-165" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Query the current state of the attentuation protection.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '162', 162)" onmouseover="showTip(event, '162', 162)">
+            queryContinuousMode 
+          </code>
+          <div class="tip" id="162">
+            <strong>Signature:</strong> RfSource -&gt; Async&lt;OnOffState&gt;<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/anton-pt/Endorphin.Core/tree/master/src/Endorphin.Instrument.Keysight.N5172B/Sweep.fs#L138-138" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Query whterh sweeps are set to immediately repeat, or if they need some trigger
+to begin replaying.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '163', 163)" onmouseover="showTip(event, '163', 163)">
+            queryDirection 
+          </code>
+          <div class="tip" id="163">
+            <strong>Signature:</strong> RfSource -&gt; Async&lt;Direction&gt;<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/anton-pt/Endorphin.Core/tree/master/src/Endorphin.Instrument.Keysight.N5172B/Sweep.fs#L128-128" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Query the currently set direction of the sweep.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '164', 164)" onmouseover="showTip(event, '164', 164)">
+            queryDwellTime 
+          </code>
+          <div class="tip" id="164">
+            <strong>Signature:</strong> RfSource -&gt; Async&lt;Duration&gt;<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/anton-pt/Endorphin.Core/tree/master/src/Endorphin.Instrument.Keysight.N5172B/Sweep.fs#L155-155" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Query the current time taken for each sweep point.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '165', 165)" onmouseover="showTip(event, '165', 165)">
+            queryMode 
+          </code>
+          <div class="tip" id="165">
+            <strong>Signature:</strong> RfSource -&gt; Async&lt;AutoManualState&gt;<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/anton-pt/Endorphin.Core/tree/master/src/Endorphin.Instrument.Keysight.N5172B/Sweep.fs#L147-147" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Query whether the current sweep mode is in automatic or manual selection.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '166', 166)" onmouseover="showTip(event, '166', 166)">
+            queryRetrace 
+          </code>
+          <div class="tip" id="166">
+            <strong>Signature:</strong> RfSource -&gt; Async&lt;OnOffState&gt;<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/anton-pt/Endorphin.Core/tree/master/src/Endorphin.Instrument.Keysight.N5172B/Sweep.fs#L175-175" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Query whether the machine will retrace back to the first point in a sweep (On), or if
+it will remain at the end (Off).</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '167', 167)" onmouseover="showTip(event, '167', 167)">
+            querySweepType 
+          </code>
+          <div class="tip" id="167">
+            <strong>Signature:</strong> RfSource -&gt; Async&lt;SweepType&gt;<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/anton-pt/Endorphin.Core/tree/master/src/Endorphin.Instrument.Keysight.N5172B/Sweep.fs#L120-120" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Query the current sweep type of the machine.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '168', 168)" onmouseover="showTip(event, '168', 168)">
+            setAttenuationProtection 
+          </code>
+          <div class="tip" id="168">
+            <strong>Signature:</strong> RfSource -&gt; OnOffState -&gt; Async&lt;unit&gt;<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/anton-pt/Endorphin.Core/tree/master/src/Endorphin.Instrument.Keysight.N5172B/Sweep.fs#L163-163" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Set the state of the attentuation protection for frequency and power step sweeps.
+Disabling allows the sweep to more optimally set the attenuation leveling control
+and the output attentuation at each sweep point, but sets the dwell time to a minimum
+of 50ms for safety.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '169', 169)" onmouseover="showTip(event, '169', 169)">
+            setContinousMode 
+          </code>
+          <div class="tip" id="169">
+            <strong>Signature:</strong> RfSource -&gt; OnOffState -&gt; Async&lt;unit&gt;<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/anton-pt/Endorphin.Core/tree/master/src/Endorphin.Instrument.Keysight.N5172B/Sweep.fs#L135-135" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Set whether sweeps should immediately repeat, or wait for some trigger to begin
+replaying.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '170', 170)" onmouseover="showTip(event, '170', 170)">
+            setDirection 
+          </code>
+          <div class="tip" id="170">
+            <strong>Signature:</strong> RfSource -&gt; Direction -&gt; Async&lt;unit&gt;<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/anton-pt/Endorphin.Core/tree/master/src/Endorphin.Instrument.Keysight.N5172B/Sweep.fs#L126-126" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Set direction of sweep from start -&gt; stop for Up and stop -&gt; start for Down.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '171', 171)" onmouseover="showTip(event, '171', 171)">
+            setDwellTime 
+          </code>
+          <div class="tip" id="171">
+            <strong>Signature:</strong> RfSource -&gt; Duration -&gt; Async&lt;unit&gt;<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/anton-pt/Endorphin.Core/tree/master/src/Endorphin.Instrument.Keysight.N5172B/Sweep.fs#L153-153" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Set the time to stay on each point of a sweep for.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '172', 172)" onmouseover="showTip(event, '172', 172)">
+            setMode 
+          </code>
+          <div class="tip" id="172">
+            <strong>Signature:</strong> RfSource -&gt; AutoManualState -&gt; Async&lt;unit&gt;<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/anton-pt/Endorphin.Core/tree/master/src/Endorphin.Instrument.Keysight.N5172B/Sweep.fs#L145-145" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Sets manual or automatic mode for progressing through points of a sweep.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '173', 173)" onmouseover="showTip(event, '173', 173)">
+            setRetrace 
+          </code>
+          <div class="tip" id="173">
+            <strong>Signature:</strong> RfSource -&gt; OnOffState -&gt; Async&lt;unit&gt;<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/anton-pt/Endorphin.Core/tree/master/src/Endorphin.Instrument.Keysight.N5172B/Sweep.fs#L172-172" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Set whether to retrace back to the first point of a sweep (On), or remain at the end
+point of the sweep (Off).</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '174', 174)" onmouseover="showTip(event, '174', 174)">
+            setSweepType 
+          </code>
+          <div class="tip" id="174">
+            <strong>Signature:</strong> RfSource -&gt; SweepType -&gt; Async&lt;unit&gt;<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/anton-pt/Endorphin.Core/tree/master/src/Endorphin.Instrument.Keysight.N5172B/Sweep.fs#L118-118" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Set the sweep type to either List or Step.</p>
+
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+        </div>
+        <div class="span3">
+          <img src="/Endorphin.Core/img/logo.png" alt="F# Project" style="width:150px;margin:10px" />  
+          <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
+            <li class="nav-header">Endorphin.Core</li>
+            <li><a href="/Endorphin.Core/index.html">Home page</a></li>
+            <li class="divider"></li>
+            <li><a href="http://nuget.org/packages/Endorphin.Core">Get Library via NuGet</a></li>
+            <li><a href="http://github.com/anton-pt/Endorphin.Core">Source Code on GitHub</a></li>
+            <li><a href="/Endorphin.Core/license.html">License</a></li>
+            <li><a href="/Endorphin.Core/release-notes.html">Release Notes</a></li>
+            
+            <li class="nav-header">Getting started</li>
+            <li><a href="/Endorphin.Core/tutorial.html">Sample tutorial</a></li>
+
+            <li class="nav-header">Documentation</li>
+            <li><a href="/Endorphin.Core/reference/index.html">API Reference</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <a href="http://github.com/anton-pt/Endorphin.Core"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"/></a>
+  </body>
+  </html>

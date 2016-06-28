@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Pulse - Endorphin.Core</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content=""/>
+    <meta name="author" content="University of Warwick EPR and Diamond group"/>
+
+    <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
+    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet"/>
+
+    <link type="text/css" rel="stylesheet" href="/Endorphin.Core/content/style.css" />
+    <script type="text/javascript" src="/Endorphin.Core/content/tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="container">
+      <div class="masthead">
+        <ul class="nav nav-pills pull-right">
+          <li><a href="http://fsharp.org">fsharp.org</a></li>
+          <li><a href="http://github.com/anton-pt/Endorphin.Core">github page</a></li>
+        </ul>
+        <h3 class="muted"><a href="/Endorphin.Core/index.html">Endorphin.Core</a></h3>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="span9" id="main">
+          
+
+
+
+<h1>Pulse</h1>
+<p>
+  <span>Namespace: Endorphin.Instrument.Keysight.N5172B</span><br />
+</p>
+<div class="xmldoc">
+</div>
+
+<!-- Render nested types and modules, if there are any -->
+
+  <h3>Functions and values</h3>
+  <table class="table table-bordered member-list">
+    <thead>
+      <tr><td>Function or value</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '92', 92)" onmouseover="showTip(event, '92', 92)">
+            delay duration
+          </code>
+          <div class="tip" id="92">
+            <strong>Signature:</strong> duration:uint32 -&gt; Pulse<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/anton-pt/Endorphin.Core/tree/master/src/Endorphin.Instrument.Keysight.N5172B/Experiment.fs#L49-49" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Create a single delay pulse to an experiment, the same length each repetition.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '93', 93)" onmouseover="showTip(event, '93', 93)">
+            delayWithIncrement duration increment
+          </code>
+          <div class="tip" id="93">
+            <strong>Signature:</strong> duration:uint32 -&gt; increment:uint32 -&gt; Pulse<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/anton-pt/Endorphin.Core/tree/master/src/Endorphin.Instrument.Keysight.N5172B/Experiment.fs#L45-45" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Create a delay between pulses to the experiment, with an increment each repetition.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '94', 94)" onmouseover="showTip(event, '94', 94)">
+            marker markers duration
+          </code>
+          <div class="tip" id="94">
+            <strong>Signature:</strong> markers:Markers -&gt; duration:uint32 -&gt; Pulse<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/anton-pt/Endorphin.Core/tree/master/src/Endorphin.Instrument.Keysight.N5172B/Experiment.fs#L58-58" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Create a marker pulse with set markers to an experiment, which is the same length each repetition.
+At least one marker must be left blank throughout for internal use by Endorphin.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '95', 95)" onmouseover="showTip(event, '95', 95)">
+            markerWithIncrement (...)
+          </code>
+          <div class="tip" id="95">
+            <strong>Signature:</strong> markers:Markers -&gt; duration:uint32 -&gt; increment:uint32 -&gt; Pulse<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/anton-pt/Endorphin.Core/tree/master/src/Endorphin.Instrument.Keysight.N5172B/Experiment.fs#L53-53" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Create a marker pulse with set markers and an incremement each repetition to an experiment.
+At least one marker must be left blank throughout for internal use by Endorphin.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '96', 96)" onmouseover="showTip(event, '96', 96)">
+            rf phases duration
+          </code>
+          <div class="tip" id="96">
+            <strong>Signature:</strong> phases:PhaseCycle -&gt; duration:uint32 -&gt; Pulse<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/anton-pt/Endorphin.Core/tree/master/src/Endorphin.Instrument.Keysight.N5172B/Experiment.fs#L42-42" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Create an RF pulse to an experiment with no increment.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '97', 97)" onmouseover="showTip(event, '97', 97)">
+            rfWithIncrement (...)
+          </code>
+          <div class="tip" id="97">
+            <strong>Signature:</strong> phases:PhaseCycle -&gt; duration:uint32 -&gt; increment:uint32 -&gt; Pulse<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/anton-pt/Endorphin.Core/tree/master/src/Endorphin.Instrument.Keysight.N5172B/Experiment.fs#L38-38" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Create an RF pulse to an experiment with an increment each repetition.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '98', 98)" onmouseover="showTip(event, '98', 98)">
+            trigger markers
+          </code>
+          <div class="tip" id="98">
+            <strong>Signature:</strong> markers:Markers -&gt; Pulse<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/anton-pt/Endorphin.Core/tree/master/src/Endorphin.Instrument.Keysight.N5172B/Experiment.fs#L62-62" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Create a single-sample trigger pulse on the given markers to an experiment.
+At least one marker must be left blank throughout for internal use by Endorphin.</p>
+
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+        </div>
+        <div class="span3">
+          <img src="/Endorphin.Core/img/logo.png" alt="F# Project" style="width:150px;margin:10px" />  
+          <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
+            <li class="nav-header">Endorphin.Core</li>
+            <li><a href="/Endorphin.Core/index.html">Home page</a></li>
+            <li class="divider"></li>
+            <li><a href="http://nuget.org/packages/Endorphin.Core">Get Library via NuGet</a></li>
+            <li><a href="http://github.com/anton-pt/Endorphin.Core">Source Code on GitHub</a></li>
+            <li><a href="/Endorphin.Core/license.html">License</a></li>
+            <li><a href="/Endorphin.Core/release-notes.html">Release Notes</a></li>
+            
+            <li class="nav-header">Getting started</li>
+            <li><a href="/Endorphin.Core/tutorial.html">Sample tutorial</a></li>
+
+            <li class="nav-header">Documentation</li>
+            <li><a href="/Endorphin.Core/reference/index.html">API Reference</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <a href="http://github.com/anton-pt/Endorphin.Core"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"/></a>
+  </body>
+  </html>
