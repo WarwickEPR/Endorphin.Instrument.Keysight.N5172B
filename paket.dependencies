@@ -1,0 +1,21 @@
+source https://nuget.org/api/v2
+
+nuget FSharp.Core redirects: force
+
+nuget Endorphin.Core.NationalInstruments
+
+github WarwickEPR/Endorphin.Core src/Endorphin.Core.Units.fs
+github WarwickEPR/Endorphin.Core src/Endorphin.Core.CRC.fs
+github WarwickEPR/Endorphin.Core src/Endorphin.Core.String.fs
+github WarwickEPR/Endorphin.Core src/Endorphin.Core.Choice.fs
+github WarwickEPR/Endorphin.Core src/Endorphin.Core.Collections.fs
+github WarwickEPR/Endorphin.Core src/Endorphin.Core.Control.fs
+
+group Build
+    source https://nuget.org/api/v2
+
+    nuget SourceLink.Fake
+    nuget FAKE
+    nuget FSharp.Formatting
+
+    github fsharp/FAKE modules/Octokit/Octokit.fsx

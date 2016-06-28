@@ -1,0 +1,9 @@
+FSharp.Core
+Endorphin.Core.NationalInstruments
+
+File:Endorphin.Core.Units.fs
+File:Endorphin.Core.CRC.fs
+File:Endorphin.Core.String.fs
+File:Endorphin.Core.Choice.fs
+File:Endorphin.Core.Collections.fs
+File:Endorphin.Core.Control.fs
