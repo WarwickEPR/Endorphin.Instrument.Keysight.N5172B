@@ -1,21 +1,20 @@
 NUGET
   remote: https://www.nuget.org/api/v2
-    Endorphin.Core (0.9.0-beta4)
+    Endorphin.Core (0.1.1)
       FSharp.Core
-      log4net (>= 2.0.5 < 2.1)
-    Endorphin.Core.NationalInstruments (0.9.0-beta4)
-      Endorphin.Core (>= 0.9.0-beta4 < 0.10)
-      log4net (>= 2.0.5 < 2.1)
+      log4net (>= 2.0 < 3.0)
+    Endorphin.Core.NationalInstruments (0.1.1)
+      Endorphin.Core (>= 0.1.1 < 0.2)
+      log4net (>= 2.0 < 3.0)
     FSharp.Core (4.0.0.1) - redirects: force
     log4net (2.0.5)
 GITHUB
   remote: WarwickEPR/Endorphin.Core
-    src/Endorphin.Core.Choice.fs (d47ee0a277b66fe192ec3bec36cdcf42ac65adf5)
-    src/Endorphin.Core.Collections.fs (d47ee0a277b66fe192ec3bec36cdcf42ac65adf5)
-    src/Endorphin.Core.Control.fs (d47ee0a277b66fe192ec3bec36cdcf42ac65adf5)
-    src/Endorphin.Core.CRC.fs (d47ee0a277b66fe192ec3bec36cdcf42ac65adf5)
-    src/Endorphin.Core.String.fs (d47ee0a277b66fe192ec3bec36cdcf42ac65adf5)
-    src/Endorphin.Core.Units.fs (d47ee0a277b66fe192ec3bec36cdcf42ac65adf5)
+    src/Endorphin.Core.Choice.fs (f019e256c3efb43a916e46c4873465e15edd03a2)
+    src/Endorphin.Core.Collections.fs (f019e256c3efb43a916e46c4873465e15edd03a2)
+    src/Endorphin.Core.Control.fs (f019e256c3efb43a916e46c4873465e15edd03a2)
+    src/Endorphin.Core.CRC.fs (f019e256c3efb43a916e46c4873465e15edd03a2)
+    src/Endorphin.Core.String.fs (f019e256c3efb43a916e46c4873465e15edd03a2)
 GROUP Build
 NUGET
   remote: https://www.nuget.org/api/v2
