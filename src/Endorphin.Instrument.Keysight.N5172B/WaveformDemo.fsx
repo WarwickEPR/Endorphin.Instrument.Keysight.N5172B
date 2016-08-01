@@ -1,7 +1,10 @@
 // Copyright (c) University of Warwick. All Rights Reserved. Licensed under the Apache License, Version 2.0. See LICENSE.txt in the project root for license information.
 
-#r @"../../packages/Endorphin.Core/lib/net40/Endorphin.Core.dll"
-#r @"bin/Release/Endorphin.Instrument.Keysight.N5172B.dll"
+#I "../../packages"
+
+#r "Endorphin.Core/lib/net452/Endorphin.Core.dll"
+#r "Endorphin.Core.NationalInstruments/lib/net452/Endorphin.Core.NationalInstruments.dll"
+#r "bin/Release/Endorphin.Instrument.Keysight.N5172B.dll"
 
 // This stuff is very "low-level" for creation - in general I'd expect you probably won't need this,
 // it's just here for completeness.  This demonstrates direct creation of markers, samples, segments

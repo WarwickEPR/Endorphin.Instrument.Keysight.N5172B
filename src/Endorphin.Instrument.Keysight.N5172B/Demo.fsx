@@ -3,7 +3,8 @@
 #I "../../packages"
 
 #r "log4net/lib/net40-full/log4net.dll"
-#r "Endorphin.Core/lib/net40/Endorphin.Core.dll"
+#r "Endorphin.Core/lib/net452/Endorphin.Core.dll"
+#r "Endorphin.Core.NationalInstruments/lib/net452/Endorphin.Core.NationalInstruments.dll"
 #r "bin/Release/Endorphin.Instrument.Keysight.N5172B.dll"
 
 open Microsoft.FSharp.Data.UnitSystems.SI.UnitSymbols
