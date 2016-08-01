@@ -1,3 +1,6 @@
+#### 0.1.2 - 2016-08-01
+* Fix unit-of-measure referencing issues with Endorphin.Core
+
 #### 0.1.1 - 2016-07-01
 * Update to new Endorphin.Core API
 
