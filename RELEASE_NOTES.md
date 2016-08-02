@@ -1,3 +1,6 @@
+#### 0.2.0 - 2016-08-02
+* Change to synchronous IO operations to prevent memory errors in VISA code
+
 #### 0.1.2 - 2016-08-01
 * Fix unit-of-measure referencing issues with Endorphin.Core
 
