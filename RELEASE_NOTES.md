@@ -1,3 +1,9 @@
+#### 0.3.0 - 2016-08-11
+* Move to Endorphin.Core.SCPI-based IO, and remove type-hiding on the instrument
+  so commands may be sent manually.
+* Refactor functions to be consistent - the instrument is now always the last
+  argument.
+
 #### 0.2.0 - 2016-08-02
 * Change to synchronous IO operations to prevent memory errors in VISA code
 
