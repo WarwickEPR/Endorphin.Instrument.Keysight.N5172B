@@ -12,8 +12,8 @@ module internal InternalModel =
             { EncodedIQ      : byte array
               EncodedMarkers : byte array }
 
-        /// Segment data after it has been encoded, including the lengths and data indicator '#'.
-        /// Ready to write to machine.
+        /// Segment data after it has been encoded, including the filename, lengths and
+        /// data indicator '#'. Ready to write to machine as a value in the SCPI functions.
         type EncodedSegmentFiles =
             { Waveform : byte array
               Markers  : byte array }
@@ -35,16 +35,16 @@ module internal InternalModel =
               RfPulseCount          : int
               RfPhaseCount          : int option
               RfBlankMarker         : UserSignalMarker
-              ShotRepetitionTime    : SampleCount
+              ShotRepetitionTime    : uint32
               ShotsPerPoint         : uint16 }
 
         // No need for type aliases here because there's no other step which uses similar types
         /// A single pulse which can be easily converted into a single segment, for use after the
         /// compilation of the experiment and optimisation phases.
         type StaticPulse =
-            | StaticRf      of phase : Phase * duration : SampleCount
-            | StaticDelay   of duration : SampleCount
-            | StaticMarker  of markers : Markers * duration : SampleCount
+            | StaticRf      of phase : Phase * duration : uint32
+            | StaticDelay   of duration : uint32
+            | StaticMarker  of markers : Markers * duration : uint32
 
         /// An experiment after it has been passed through the user-input verifier.
         type VerifiedExperiment =
@@ -52,7 +52,7 @@ module internal InternalModel =
               Metadata : ExperimentMetadata }
 
         type CompiledExperimentPoint =
-            { CompiledData   : (Sample * SampleCount) list
+            { CompiledData   : (Sample * uint32) list
               CompiledLength : uint32 }
 
         /// A list of samples and their repetitions, which could be easily written onto the
@@ -77,8 +77,8 @@ module internal InternalModel =
 
         /// An assembled experiment, ready for storing onto the machine.
         type EncodedExperiment =
-            { Segments   : (SegmentId * Segment) list
-              Sequences  : (SequenceId * Sequence) list
-              Points     : (SequenceId * Sequence) list
-              Experiment : (SequenceId * Sequence)
+            { Segments   : (string * Segment) list
+              Sequences  : (string * Sequence) list
+              Points     : (string * Sequence) list
+              Experiment : (string * Sequence)
               Metadata   : ExperimentMetadata }

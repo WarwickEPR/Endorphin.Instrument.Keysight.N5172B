@@ -36,14 +36,14 @@ module Phase =
 module Pulse =
     /// Create an RF pulse to an experiment with an increment each repetition.
     let rfWithIncrement phases duration increment =
-        Rf (phases, SampleCount duration, SampleCount increment)
+        Rf (phases, duration, increment)
 
     /// Create an RF pulse to an experiment with no increment.
     let rf phases duration = rfWithIncrement phases duration 0u
 
     /// Create a delay between pulses to the experiment, with an increment each repetition.
     let delayWithIncrement duration increment =
-        Delay (SampleCount duration, SampleCount increment)
+        Delay (duration, increment)
 
     /// Create a single delay pulse to an experiment, the same length each repetition.
     let delay duration = delayWithIncrement duration 0u
@@ -51,7 +51,7 @@ module Pulse =
     /// Create a marker pulse with set markers and an incremement each repetition to an experiment.
     /// At least one marker must be left blank throughout for internal use by Endorphin.
     let markerWithIncrement markers duration increment =
-        Marker (markers, SampleCount duration, SampleCount increment)
+        Marker (markers, duration, increment)
 
     /// Create a marker pulse with set markers to an experiment, which is the same length each repetition.
     /// At least one marker must be left blank throughout for internal use by Endorphin.
@@ -173,14 +173,13 @@ module Experiment =
                     |> checkPhaseCycles
                     |> Some
 
-            /// Convert a duration in seconds into a SampleCount.
+            /// Convert a duration in seconds into a.
             let private shotRepetitionSampleCount (Duration_sec time) =
                 if time < 0.0<s> then
                     invalidArg "Shot repetition time" "Must have a non-negative shot repetition time!"
                 else
                     time / ARB.shortestPulseDuration
                     |> uint32
-                    |> SampleCount
 
             /// Check that a valid number of repetitions of the experiment is set.
             let private repetitions experiment =
@@ -194,9 +193,9 @@ module Experiment =
 
             /// Get the duration of a pulse.
             let private pulseLength = function
-                | Rf (_, SampleCount dur, _) -> dur
-                | Delay (SampleCount dur, _) -> dur
-                | Marker (_, SampleCount dur, _) -> dur
+                | Rf (_, dur, _) -> dur
+                | Delay (dur, _) -> dur
+                | Marker (_, dur, _) -> dur
 
             /// Check that the total minimum length of the experiment is longer than the shortest
             /// allowable experiment.
@@ -227,7 +226,7 @@ module Experiment =
                         loop (space + (pulseLength hd)) tl
                 loop minimum (List.ofSeq experiment.Pulses)
 
-            /// Count the number of SampleCounts until the first RF pulse triggers.
+            /// Count the number ofs until the first RF pulse triggers.
             let private countUntilFirstRf pulses =
                 if (Seq.exists isRfPulse pulses) then
                     pulses
@@ -246,8 +245,8 @@ module Experiment =
                 | None -> pulses
                 | Some i when i >= uint32 riseCount -> pulses
                 | Some i ->
-                    let deadCount = SampleCount <| uint32 riseCount - i
-                    construct (Delay (deadCount, SampleCount 0u)) pulses
+                    let deadCount = uint32 riseCount - i
+                    construct (Delay (deadCount, 0u)) pulses
 
             /// Add space to the beginning and end of the pulse if this is necessary for the FIR filter.
             let private addSpaceForFir pulses =
@@ -260,10 +259,10 @@ module Experiment =
             let private updateExperimentPulses (experiment : Experiment) =
                 let shotRepetitionTime = shotRepetitionSampleCount experiment.ShotRepetitionTime
                 let pulses =
-                    if shotRepetitionTime = SampleCount 0u then
+                    if shotRepetitionTime = 0u then
                         experiment.Pulses
                     else
-                        experiment.Pulses |> Seq.appendSingleton (Delay (shotRepetitionTime, SampleCount 0u))
+                        experiment.Pulses |> Seq.appendSingleton (Delay (shotRepetitionTime, 0u))
                 let pulses' = pulses |> addSpaceForFir
                 { experiment with Pulses = pulses' }
 
@@ -334,8 +333,8 @@ module Experiment =
                         |> mapiListCopies n chooseCorrectPhase
                     { experiment with Pulses = pulses }
 
-            /// Get the new duration in SampleCount for the nth repetition.
-            let private duration (SampleCount dur) (SampleCount inc) n = SampleCount (dur + inc * n)
+            /// Get the new duration in for the nth repetition.
+            let private duration dur inc n = (dur + inc * n)
 
             /// Set the duration in a pulse to the correct duration for the repetition that we're on.
             /// The increment remains, but is safe to discard after this function.
@@ -402,7 +401,7 @@ module Experiment =
             let private countUntilRf samples =
                 let rec loop acc = function
                     | [] -> None
-                    | (sample, SampleCount dur) :: tail when sample.I = 0s && sample.Q = 0s ->
+                    | (sample, dur) :: tail when sample.I = 0s && sample.Q = 0s ->
                         loop (acc + dur) tail
                     | _ -> Some acc
                 loop 0u samples
@@ -412,22 +411,22 @@ module Experiment =
                 let rec loop rem acc = function
                     | tail when rem = 0u -> ((List.rev acc), tail)
                     | [] -> failwith "Tried to split off more samples than were left."
-                    | (sample, SampleCount dur) :: tail when dur > rem ->
-                        let acc' = (sample, SampleCount rem) :: acc
-                        let tail' = (sample, SampleCount (dur - rem)) :: tail
+                    | (sample, dur) :: tail when dur > rem ->
+                        let acc' = (sample, rem) :: acc
+                        let tail' = (sample, (dur - rem)) :: tail
                         loop 0u acc' tail'
-                    | (sample, SampleCount dur) :: tail ->
-                        loop (rem - dur) ((sample, SampleCount dur) :: acc) tail
+                    | (sample, dur) :: tail ->
+                        loop (rem - dur) ((sample, dur) :: acc) tail
                 loop count [] samples
 
             /// Separate a list of (sample, count) into a list where each sample has a count of 1.
             let private separateSampleList samples =
                 let rec loop acc = function
                     | [] -> List.rev acc
-                    | (sample, SampleCount dur) :: tail when dur > 1u ->
-                        loop ((sample, SampleCount 1u) :: acc) ((sample, SampleCount (dur - 1u)) :: tail)
+                    | (sample, dur) :: tail when dur > 1u ->
+                        loop ((sample, 1u) :: acc) ((sample, (dur - 1u)) :: tail)
                     | (sample, _) :: tail ->
-                        loop ((sample, SampleCount 1u) :: acc) tail
+                        loop ((sample, 1u) :: acc) tail
                 loop [] samples
 
             /// Update a sample for the FIR filter using the indexer and the index in the list
@@ -493,8 +492,8 @@ module Experiment =
                         loop acc' tail' (idx - 1)
                 loop [] samples rfCount
 
-            /// Add two SampleCounts together.
-            let private addDurations (_, SampleCount one) (_, SampleCount two) = SampleCount (one + two)
+            /// Add twos together.
+            let private addDurations (_, one) (_, two) = (one + two)
 
             /// Check whether two samples are equal by comparing their hashes.
             let private equalSamples a b = Sample.hash a = Sample.hash b
@@ -523,7 +522,7 @@ module Experiment =
             let private toCompiledPoints list =
                 let rec loop n = function
                     | [] -> n
-                    | (_, SampleCount dur) :: tail -> loop (n + dur) tail
+                    | (_, dur) :: tail -> loop (n + dur) tail
                 { CompiledData = list; CompiledLength = loop 0u list }
 
             /// Compile an experiment into a direct list of samples which could (if they were written
@@ -550,7 +549,7 @@ module Experiment =
             let private intByUint16 num =
                 (num / int UInt16.MaxValue, uint16 (num % int UInt16.MaxValue))
 
-            /// Split an `int` SampleCount into parts of uint16, constructing enough sequence elements
+            /// Split an `int` into parts of uint16, constructing enough sequence elements
             /// along the way to make up a whole integer.
             let private listToPrepend id curCount newCount =
                 let (quotient, remainder) = intByUint16 newCount
@@ -568,17 +567,16 @@ module Experiment =
             let private takeCountFromNextElement list (count : uint32) (reps : uint32) =
                 match list with
                 | [] -> failwith "Tried to read too many elements during compression!"
-                | (sample, SampleCount dur) :: tail when (count * reps) >= dur ->
+                | (sample, dur) :: tail when (count * reps) >= dur ->
                     (sample, tail, dur)
-                | (sample, SampleCount dur) :: tail ->
-                    (sample, (sample, SampleCount(dur - (count * reps))) :: tail, (count * reps))
+                | (sample, dur) :: tail ->
+                    (sample, (sample,(dur - (count * reps))) :: tail, (count * reps))
 
             /// Get how many times the next sample in a compiled experiment is repeated.
-            let nextSampleCount (list : (Sample * SampleCount) list) =
+            let nextSampleCount (list : _ list) =
                 list
                 |> List.tryHead
-                |> (function | Some s -> snd s; | None -> SampleCount 0u)
-                |> (fun (SampleCount s) -> s)
+                |> (function | Some s -> snd s; | None -> 0u)
 
             /// Split a compiled experiment into a CompressedElement, and a tail of
             /// CompiledExperiment, based on the passed number of samples to pick.
@@ -596,7 +594,7 @@ module Experiment =
                            CompiledLength = compiled.CompiledLength - (count * reps) })
                     | rem ->
                         let (sample, input', taken) = takeCountFromNextElement input rem reps
-                        let acc' = (sample, SampleCount (taken / reps)) :: acc
+                        let acc' = (sample, (taken / reps)) :: acc
                         loop acc' input' (rem - (taken / reps))
                 loop [] compiled.CompiledData count
 
@@ -623,7 +621,7 @@ module Experiment =
                 splitCompiledExperiment count reps compiled
 
             /// Get the string of an id from an element.
-            let elementId = fst >> waveformIdString
+            let elementId = fst >> Filename.waveformId
 
             /// Extract a sequence from a sequence type.
             let extractSequence (SequenceType sequence) = sequence

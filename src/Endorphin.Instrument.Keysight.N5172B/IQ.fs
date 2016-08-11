@@ -8,6 +8,6 @@ module IQ =
         /// Command reference p.39.
         let private iqModulationKey = ":DM:STATE"
         /// Set the state of the IQ modulation.
-        let setIqModulation = IO.setOnOffState iqModulationKey
+        let setIqModulation = fun x -> IO.set<OnOffState> iqModulationKey x
         /// Query the state of the IQ modulation.
-        let queryIqModulation = IO.queryOnOffState iqModulationKey
+        let queryIqModulation = fun x -> IO.query Parse.onOffState iqModulationKey x

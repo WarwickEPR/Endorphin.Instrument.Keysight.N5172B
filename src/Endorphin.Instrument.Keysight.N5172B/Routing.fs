@@ -5,161 +5,6 @@ namespace Endorphin.Instrument.Keysight.N5172B
 open Endorphin.Core
 
 module Routing =
-    [<AutoOpen>]
-    module private Parsing =
-        /// If a type claiming to provide an interface we're using is passed, but we don't know about
-        /// it, we have to fail execution.
-        let failIncorrectType signal =
-            sprintf "Unexpected output signal in interface %A, %A" signal.GetType signal
-            |> UnexpectedReplyException
-            |> raise
-
-        /// Convert an internal representation of a marker route into a machine representation.
-        let private markerString = function
-            | RouteMarker1 -> "M1"
-            | RouteMarker2 -> "M2"
-            | RouteMarker3 -> "M3"
-            | RouteMarker4 -> "M4"
-
-        /// Convert an internal representation of the AUX-29 pin into a machine representation.
-        let private auxString = function
-            | RouteAux29 -> "AUX29"
-
-        /// Convert an internal representation of a user BNC into a machine representation.
-        let private userBncString = function
-            | RouteBasebandTrigger1 -> "BBTRIGGER1"
-            | RouteBasebandTrigger2 -> "BBTRIGGER2"
-            | RouteEvent1  -> "EVENT1"
-            | RoutePatternTrigger -> "PTRIGGER"
-
-        /// Convert an internal representation of a marker signal into a machine representation.
-        let private markerSignalString (signal : IMarkerSignal) =
-            match signal with
-            | :? UserSignalMarker as signal -> markerString signal
-            | _ -> failIncorrectType signal
-
-        /// Convert an internal representation of a user output route into a machine representation.
-        let private userSignalString (signal : IUserSignal) =
-            match signal with
-            | :? UserSignalMarker as signal -> markerString signal
-            | :? UserSignalAux as signal -> auxString signal
-            | _ -> failIncorrectType signal
-
-        /// Convert an internal representation of a user BNC signal route into a machine representation.
-        let private userBncSignalString (signal : IUserBncSignal) =
-            match signal with
-            | :? UserBnc as signal -> userBncString signal
-            | _ -> failIncorrectType signal
-
-        /// Convert a machine representation of a marker signal into an internal representation.
-        let parseMarkerSignal str =
-            match String.toUpper str with
-            | "M1"   -> RouteMarker1 :> IMarkerSignal
-            | "M2"   -> RouteMarker2 :> IMarkerSignal
-            | "M3"   -> RouteMarker3 :> IMarkerSignal
-            | "M4"   -> RouteMarker4 :> IMarkerSignal
-            | "NONE" -> NoSignal     :> IMarkerSignal
-            | _ -> raise << UnexpectedReplyException
-                   <| sprintf "Unexpted marker signal string: %s" str
-
-        /// Convert a machine representation of a user output route into an internal representation.
-        let parseUserSignal str =
-            match String.toUpper str with
-            | "M1"    -> RouteMarker1 :> IUserSignal
-            | "M2"    -> RouteMarker2 :> IUserSignal
-            | "M3"    -> RouteMarker3 :> IUserSignal
-            | "M4"    -> RouteMarker4 :> IUserSignal
-            | "AUX29" -> RouteAux29   :> IUserSignal
-            | "NONE"  -> NoSignal     :> IUserSignal
-            | _ -> raise << UnexpectedReplyException
-                   <| sprintf "Unexpected user output signal string: %s" str
-
-        /// Convert an internal representation of a common system routing into a machine representation.
-        let private systemSignalCommonString = function
-            | RouteSourceSettled -> "SETTLED"
-            | RoutePulseVideo -> "PVIDEO"
-            | RoutePulseSync -> "PSYNC"
-            | RouteSweptFunctionDone -> "SFDONE"
-
-        /// Convert an internal representation of a sweep out-only routing into a machine representation.
-        let private systemSignalSweepOutString = function
-            | RouteSweepOut -> "SWEEP"
-            | RouteSweepRun -> "SRUN"
-
-        /// Convert an internal representation of a sweep out routing into a machine representation.
-        let private sweepOutSignalString (signal : ISweepOutSignal) =
-            match signal with
-            | :? SystemSignalCommon as signal -> systemSignalCommonString signal
-            | :? SystemSignalSweepOut as signal -> systemSignalSweepOutString signal
-            | _ -> failIncorrectType signal
-
-        /// Convert an internal representation of a trigger-only routing into a machine representation.
-        let private systemSignalTriggerString = function
-            | RouteSweepTriggerOut -> "SWEEP"
-            | RouteLxi -> "LXI"
-            | RoutePulseBnc -> "PULSE"
-            | RouteOtherTrigger -> "TRIG"
-
-        /// Convert an internal representation of a trigger routing into a machine representation.
-        let private triggerSignalString (signal : ITriggerSignal) =
-            match signal with
-            | :? SystemSignalCommon as signal -> systemSignalCommonString signal
-            | :? SystemSignalTrigger as signal -> systemSignalTriggerString signal
-            | _ -> failIncorrectType signal
-
-        /// Convert a machine representation of a sweep out routing into an internal representation.
-        let parseSweepOutSignal str =
-            match String.toUpper str with
-            | "SETT" | "SETTLED"  -> RouteSourceSettled     :> ISweepOutSignal
-            | "PVID" | "PVIDEO"   -> RoutePulseVideo        :> ISweepOutSignal
-            | "PSYN" | "PSYNC"    -> RoutePulseSync         :> ISweepOutSignal
-            | "SFD" | "SFDONE"    -> RouteSweptFunctionDone :> ISweepOutSignal
-            | "SWE" | "SWEEP"     -> RouteSweepOut          :> ISweepOutSignal
-            | "SRUN"              -> RouteSweepRun          :> ISweepOutSignal
-            | "NONE"              -> NoSignal               :> ISweepOutSignal
-            | _ -> raise << UnexpectedReplyException
-                   <| sprintf "Unexpected sweep out signal string: %s" str
-
-        /// Convert a machine representation of a trigger routing into an internal representation.
-        let parseTriggerSignal str =
-            match String.toUpper str with
-            | "SETT" | "SETTLED"  -> RouteSourceSettled     :> ITriggerSignal
-            | "PVID" | "PVIDEO"   -> RoutePulseVideo        :> ITriggerSignal
-            | "PSYN" | "PSYNC"    -> RoutePulseSync         :> ITriggerSignal
-            | "SFD" | "SFDONE"    -> RouteSweptFunctionDone :> ITriggerSignal
-            | "SWE" | "SWEEP"     -> RouteSweepTriggerOut   :> ITriggerSignal
-            | "LXI"               -> RouteLxi               :> ITriggerSignal
-            | "PULS" | "PULSE"    -> RoutePulseBnc          :> ITriggerSignal
-            | "TRIG" | "TRIGGER1" | "TRIGGER2"
-                                  -> RouteOtherTrigger      :> ITriggerSignal
-            | "NONE"              -> NoSignal               :> ITriggerSignal
-            | _ -> raise << UnexpectedReplyException
-                   <| sprintf "Unexpected trigger signal string: %s" str
-
-        /// Convert a machine representation of a user BNC routing into an internal representation.
-        let parseUserBncSignal str =
-            match String.toUpper str with
-            | "BBTR" | "BBTR1" | "BBTRIGGER" | "BBTRIGGER1"
-                                     -> RouteBasebandTrigger1 :> IUserBncSignal
-            | "BBTR2" | "BBTRIGGER2" -> RouteBasebandTrigger2 :> IUserBncSignal
-            | "EVEN" | "EVEN1" | "EVENT" | "EVENT1"
-                                     -> RouteEvent1  :> IUserBncSignal
-            | "PTR" | "PTRIGGER"     -> RoutePatternTrigger :> IUserBncSignal
-            | "NONE"                 -> NoSignal     :> IUserBncSignal
-            | _ -> raise << UnexpectedReplyException
-                   <| sprintf "Unexpected user BNC signal string: %s" str
-
-        /// Convert an internal representation of an output routing into a machine representation.
-        let signalString (signal : ISignal) =
-            match signal with
-            | :? NoSignal                  -> "NONE"
-            | :? IUserSignal     as signal -> userSignalString signal
-            | :? ISweepOutSignal as signal -> sweepOutSignalString signal
-            | :? ITriggerSignal  as signal -> triggerSignalString signal
-            | :? IMarkerSignal   as signal -> markerSignalString signal
-            | :? IUserBncSignal  as signal -> userBncSignalString signal
-            | _ -> failIncorrectType signal
-
     /// The default output routing that the machine would use after a *RST command.
     let private defaultOutputRouting = {
         BbTrig1  = RouteMarker2
@@ -245,7 +90,7 @@ module Routing =
             | RouteBasebandTrigger2 -> withBasebandTrigger2 NoSignal routing
             | RouteEvent1           -> withEvent1 NoSignal routing
             | RoutePatternTrigger   -> withPatternTrigger NoSignal routing
-        | _ -> failIncorrectType value
+        | _ -> Parse.failIncorrectType value
 
     /// Set the routing of the internal signal pattern trigger 1.  This overwrites any output
     /// signal on the given BNC.
@@ -347,23 +192,23 @@ module Routing =
     let private markerPolarityKey = ":RAD:ARB:MPOL"
 
     /// Set a single output routing on the machine.
-    let private setSignalRoute key instrument route =
-        IO.setValueString signalString key instrument route
+    let private setSignalRoute key route instrument =
+        IO.set<ISignal> key route instrument
 
     /// Query a key for an IUserOutputSignal in internal representation.
-    let private queryUserSignal = IO.queryKeyString parseUserSignal
+    let private queryUserSignal = fun x -> IO.query Parse.userSignal x
 
     /// Query a key for an ISweepOutSignal in internal representation.
-    let private querySweepOutSignal = IO.queryKeyString parseSweepOutSignal
+    let private querySweepOutSignal = fun x -> IO.query Parse.sweepOutSignal x
 
     /// Query a key for an ITriggerSignal in internal representation.
-    let private queryTriggerSignal = IO.queryKeyString parseTriggerSignal
+    let private queryTriggerSignal = fun x -> IO.query Parse.triggerSignal x
 
     /// Query a key for an IMarkerSignal in internal representation.
-    let private queryMarkerSignal = IO.queryKeyString parseMarkerSignal
+    let private queryMarkerSignal = fun x -> IO.query Parse.markerSignal x
 
     /// Query a key for an IUserBncSignal in internal representation.
-    let private queryUserBncSignal = IO.queryKeyString parseUserBncSignal
+    let private queryUserBncSignal = fun x -> IO.query Parse.userBncSignal x
 
     /// Make the specific marker polarity key for a given marker.
     let private makeMarkerPolarityKey marker =
@@ -375,51 +220,51 @@ module Routing =
             | RouteMarker4 -> "MARK4" )
 
     /// Set the polarity of a single marker.
-    let internal setMarkerPolarity marker instrument value =
-        IO.setPolarity (makeMarkerPolarityKey marker) instrument value
+    let internal setMarkerPolarity marker value instrument =
+        IO.set<Polarity> (makeMarkerPolarityKey marker) value instrument
 
     /// Query the polarity of a single marker.
     let internal queryMarkerPolarity marker instrument =
-        IO.queryPolarity (makeMarkerPolarityKey marker) instrument
+        IO.query Parse.polarity (makeMarkerPolarityKey marker) instrument
 
     /// Set the routing of the RF blank pulse channel.  This single function is only for use
     /// internally in Endorphin, since we need to set a marker to be the RF blanking pulse.
-    let internal setRfBlankRoute instrument route = setSignalRoute rfBlankKey instrument route
+    let internal setRfBlankRoute route instrument = setSignalRoute rfBlankKey route instrument
 
     /// Set all the available output routes to the given values.
-    let private setOutputRouting instrument routing = async {
-        do! setSignalRoute basebandTrigger1Key instrument routing.BbTrig1
-        do! setSignalRoute basebandTrigger2Key instrument routing.BbTrig2
-        do! setSignalRoute event1Key instrument routing.Event1
-        do! setSignalRoute patternTriggerKey instrument routing.PatTrig
-        do! setSignalRoute sweepOutKey instrument routing.SweepOut
-        do! setSignalRoute trigger1Key instrument routing.Trig1
-        do! setSignalRoute trigger2Key instrument routing.Trig2 }
+    let private setOutputRouting routing instrument = async {
+        do! setSignalRoute basebandTrigger1Key routing.BbTrig1 instrument
+        do! setSignalRoute basebandTrigger2Key routing.BbTrig2 instrument
+        do! setSignalRoute event1Key routing.Event1 instrument
+        do! setSignalRoute patternTriggerKey routing.PatTrig instrument
+        do! setSignalRoute sweepOutKey routing.SweepOut instrument
+        do! setSignalRoute trigger1Key routing.Trig1 instrument
+        do! setSignalRoute trigger2Key routing.Trig2 instrument }
 
     /// Set all the available input routes to the given values.
-    let private setInputRouting instrument routing = async {
-        do! setSignalRoute patternTrigger1Key instrument routing.PatTrig1
-        do! setSignalRoute patternTrigger2Key instrument routing.PatTrig2 }
+    let private setInputRouting routing instrument = async {
+        do! setSignalRoute patternTrigger1Key routing.PatTrig1 instrument
+        do! setSignalRoute patternTrigger2Key routing.PatTrig2 instrument }
 
     /// Set all the available internal routes to the given values.
-    let private setInternalRouting instrument routing = async {
-        do! setSignalRoute alternateAmplitudeKey instrument routing.AltAmplitude
-        do! setSignalRoute alcHoldKey instrument routing.AlcHold
-        do! setSignalRoute rfBlankKey instrument routing.RfBlank }
+    let private setInternalRouting routing instrument = async {
+        do! setSignalRoute alternateAmplitudeKey routing.AltAmplitude instrument
+        do! setSignalRoute alcHoldKey routing.AlcHold instrument
+        do! setSignalRoute rfBlankKey routing.RfBlank instrument }
 
     /// Set the polarities of the markers.
-    let private setMarkerPolarities instrument routing = async {
-        do! setMarkerPolarity RouteMarker1 instrument routing.PolarityM1
-        do! setMarkerPolarity RouteMarker2 instrument routing.PolarityM2
-        do! setMarkerPolarity RouteMarker3 instrument routing.PolarityM3
-        do! setMarkerPolarity RouteMarker4 instrument routing.PolarityM4 }
+    let private setMarkerPolarities routing instrument = async {
+        do! setMarkerPolarity RouteMarker1 routing.PolarityM1 instrument
+        do! setMarkerPolarity RouteMarker2 routing.PolarityM2 instrument
+        do! setMarkerPolarity RouteMarker3 routing.PolarityM3 instrument
+        do! setMarkerPolarity RouteMarker4 routing.PolarityM4 instrument }
 
     /// Set all the routings for the machine to the given values.
-    let set instrument routing = async {
-        do! setOutputRouting instrument routing.Output
-        do! setInputRouting instrument routing.Input
-        do! setInternalRouting instrument routing.Internal
-        do! setMarkerPolarities instrument routing.MarkerPolarities }
+    let set routing instrument = async {
+        do! setOutputRouting routing.Output instrument
+        do! setInputRouting routing.Input instrument
+        do! setInternalRouting routing.Internal instrument
+        do! setMarkerPolarities routing.MarkerPolarities instrument }
 
     /// Query the machine for the currently setup output routing.
     let private queryOutputRouting instrument = async {

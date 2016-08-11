@@ -2,16 +2,13 @@
 
 #I "../../packages"
 
-#r "log4net/lib/net40-full/log4net.dll"
 #r "Endorphin.Core/lib/net452/Endorphin.Core.dll"
 #r "Endorphin.Core.NationalInstruments/lib/net452/Endorphin.Core.NationalInstruments.dll"
-#r "bin/Release/Endorphin.Instrument.Keysight.N5172B.dll"
+#r "bin/Debug/Endorphin.Instrument.Keysight.N5172B.dll"
 
 open Microsoft.FSharp.Data.UnitSystems.SI.UnitSymbols
 open Endorphin.Instrument.Keysight.N5172B
-open log4net.Config
-
-BasicConfigurator.Configure()
+open Endorphin.Core
 
 open Sweep.Configure
 open Modulation.Configure
@@ -38,9 +35,9 @@ let modulationSettings = [ am ; fm ]
 
 let sweepExperiment startFrequency stopFrequency =
     async {
-        let! keysight = RfSource.openInstrument "TCPIP0::192.168.1.2" 3000<ms>
+        let! keysight = IO.connect "TCPIP0::192.168.1.2" 3000<ms>
         //let keysight = Dummy.openDumbInstrument
-        let! identity = RfSource.queryIdentity keysight
+        let! identity = SCPI.Query.identity keysight
         printf "%A" identity
 
         let sweepSettings =
@@ -60,12 +57,12 @@ let sweepExperiment startFrequency stopFrequency =
     //    do! RfSource.setModulationState keysight Off
     //    do! RfSource.Frequency.setCwFrequency keysight (FrequencyInHz 1.0e9<Hz>)
 
-        do! RfSource.applySettings keysight keysightRfSettings1
+        do! RfSource.applySettings keysightRfSettings1 keysight
 
         //let! amplitude = queryCwAmplitude keysight
         //printfn "%A" amplitude
 
-        do! RfSource.closeInstrument keysight }
+        do! IO.disconnect keysight }
 
 
 let out = sweepExperiment 1.0e9<Hz> 2.0e9<Hz>

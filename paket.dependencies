@@ -2,8 +2,8 @@ source https://nuget.org/api/v2
 
 nuget FSharp.Core redirects: force
 
-nuget Endorphin.Core
-nuget Endorphin.Core.NationalInstruments
+nuget Endorphin.Core >= 0.3.5
+nuget Endorphin.Core.NationalInstruments >= 0.3
 
 github WarwickEPR/Endorphin.Core src/Endorphin.Core.CRC.fs
 github WarwickEPR/Endorphin.Core src/Endorphin.Core.String.fs

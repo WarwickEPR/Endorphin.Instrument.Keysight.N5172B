@@ -4,8 +4,7 @@
 
 #r "Endorphin.Core/lib/net452/Endorphin.Core.dll"
 #r "Endorphin.Core.NationalInstruments/lib/net452/Endorphin.Core.NationalInstruments.dll"
-#r "bin/Release/Endorphin.Instrument.Keysight.N5172B.dll"
-#r "log4net/lib/net40-full/log4net.dll"
+#r "bin/Debug/Endorphin.Instrument.Keysight.N5172B.dll"
 
 
 // I don't open any modules throughout to demonstrate exactly where each function comes from.
@@ -17,6 +16,7 @@
 
 open Microsoft.FSharp.Data.UnitSystems.SI.UnitSymbols
 open Endorphin.Instrument.Keysight.N5172B
+open Endorphin.Core
 
 // log4net.Config.BasicConfigurator.Configure ()
 
@@ -56,22 +56,22 @@ let routing =
 
 try
     async {
-        // open the keysight box - set the VISA access string you need here and timeout
-        let! keysight = RfSource.openInstrument "USB0::0x0957::0x1F01::MY53051252::INSTR" 100000<ms>
+        // open the box keysight - set the VISA access string you need here and timeout
+        let! keysight = IO.connect "USB0::0x0957::0x1F01::MY53051252::INSTR" 100000<ms>
 
-        do! Routing.set keysight routing
-        do! ARB.Trigger.set keysight (ARB.Trigger.continuous FreeRun)
+        do! Routing.set routing keysight
+        do! ARB.Trigger.set (ARB.Trigger.continuous FreeRun) keysight
 
         // set up rf carrier
-        do! setCarrierFrequency keysight (Frequency_Hz 150e6<Hz>)
-        do! setCarrierAmplitude keysight (Power_dBm 4.0<dBm>)
+        do! setCarrierFrequency (Frequency_Hz 150e6<Hz>) keysight
+        do! setCarrierAmplitude (Power_dBm 4.0<dBm>) keysight
 
         // store the experiment on the machine and play
-        let! storedExperiment = Control.Experiment.store keysight experiment
-        do! Control.Experiment.playStored keysight storedExperiment
+        let! storedExperiment = Control.Experiment.store experiment keysight
+        do! Control.Experiment.playStored storedExperiment keysight
 
         // tidy up and close
-        do! RfSource.closeInstrument keysight }
+        do! IO.disconnect keysight }
     |> Async.RunSynchronously
 with
-    | :? InstrumentErrorException as exn -> printfn "Failed with instrument errors: %A" exn.Data0
+    | :? SCPI.InstrumentErrorException as exn -> printfn "Failed with instrument errors: %A" exn.Data0

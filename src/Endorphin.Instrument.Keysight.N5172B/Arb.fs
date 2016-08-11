@@ -16,14 +16,14 @@ module ARB =
     /// Command reference p.344.
     let private clockKey = ":RADIO:ARB:SCLOCK:RATE"
     /// Set the dual ARB clock frequency to the value specified.
-    let setClock = IO.setFrequency clockKey
+    let setClock = fun x -> IO.set<Frequency> clockKey x
     /// Query the current value of the dual ARB clock frequency.
-    let queryClock = IO.queryFrequency clockKey
+    let queryClock = fun x -> IO.query Parse.frequency clockKey x
 
     /// Key for saving header files of waveform segments in the dual ARB system.
     let private saveHeaderKey = ":RADIO:ARB:HEADER:SAVE"
     /// Save the current dual ARB settings to the header file of the currently selected waveform.
-    let setHeaderFile = IO.writeKey saveHeaderKey
+    let setHeaderFile = fun x -> IO.post saveHeaderKey x
 
     /// Key related to the state of the dual ARB player on the machine. Needs the output
     /// state to also be on before it will start to play.
@@ -39,14 +39,14 @@ module ARB =
     /// Set the state of the ARB generator of the given instrument. Can either be On
     /// or Off.
     let private setState value instrument = async {
-        do! IO.setOnOffState arbStateKey instrument value
-        do! IO.setOnOffState modulationStateKey instrument value
-        do! IO.setOnOffState outputStateKey instrument value }
+        do! IO.set<OnOffState> arbStateKey value instrument
+        do! IO.set<OnOffState> modulationStateKey value instrument
+        do! IO.set<OnOffState> outputStateKey value instrument }
 
     /// Turn on the ARB generator of the instrument.
-    let turnOn = setState On
+    let turnOn = fun x -> setState On x
     /// Turn off the ARB generator of the instrument.
-    let turnOff = setState Off
+    let turnOff = fun x -> setState Off x
 
     module Trigger =
         /// The default mode for the ARB triggering system.
@@ -161,200 +161,96 @@ module ARB =
         // This key has 3 of the word "SOURCE" in it, and all 3 are optional! But I put them in
         // because I needed entertainment.
 
-        /// Get a machine-readable string representation of the ARB trigger mode type.
-        let private modeTypeString = function
-            | ArbContinuous _ -> "CONT"
-            | ArbSingle _ -> "SING"
-            | ArbGate _ -> "GATE"
-            | ArbSegmentAdvance _ -> "SADV"
-
-        /// Get a machine-readable string representation of the ARB trigger source type.
-        let private sourceTypeString = function
-            | ArbKey -> "KEY"
-            | ArbBus -> "BUS"
-            | ArbExternal _ -> "EXT"
-
-        /// Convert an internal representation of the continuous type mode of the dual ARB triggering
-        /// system into a machine representation.
-        let private continuousModeString = function
-            | FreeRun -> "FREE"
-            | TriggerThenRun -> "TRIGGER"
-            | ResetOnTrigger -> "RESET"
-
-        /// Convert a machine representation of the continuous type mode of the dual ARB triggering
-        /// system into an internal representation.
-        let private parseContinuousMode str =
-            match String.toUpper str with
-            | "FREE" -> FreeRun
-            | "TRIG" | "TRIGGER" -> TriggerThenRun
-            | "RES" | "RESET" -> ResetOnTrigger
-            | _ -> raise << UnexpectedReplyException
-                   <| sprintf "Unexpected ARB continuous mode trigger type string: %s" str
-
-        /// Convert an internal representation of the single trigger retrigger mode of the dual
-        /// ARB trigger system into a machine representation.
-        let private retriggerModeString = function
-            | NoRetrigger -> "OFF"
-            | BufferedRetrigger -> "ON"
-            | RestartRetrigger -> "IMMEDIATE"
-
-        /// Covnert a machine representaiton of the single trigger retrigger mode of the dual ARB
-        /// trigger system into an internal representation.
-        let private parseRetriggerMode str =
-            match String.toUpper str with
-            | "ON"  | "1" -> BufferedRetrigger
-            | "OFF" | "0" -> NoRetrigger
-            | "IMM" | "IMMEDIATE" -> RestartRetrigger
-            | _ -> raise << UnexpectedReplyException
-                   <| sprintf "Unexpected dual ARB retrigger string: %s" str
-
-        /// Convert an internal representation of the segment advance type mode of the dual ARB
-        /// triggering system into a machine representation.
-        let private segmentAdvanceModeString = function
-            | SinglePlay -> "SINGLE"
-            | ContinuousPlay -> "CONTINUOUS"
-
-        /// Convert a machine representation of the segment advance type mode of the dual ARB
-        /// triggering system into a machine representation.
-        let private parseSegmentAdvanceMode str =
-            match String.toUpper str with
-            | "SING" | "SINGLE" -> ArbSegmentAdvanceMode.SinglePlay
-            | "CONT" | "CONTINUOUS" -> ContinuousPlay
-            | _ -> raise << UnexpectedReplyException
-                   <| sprintf "Unexpected ARB segment advance mode trigger type string: %s" str
-
-        /// Convert an internal representation of the physical location of an external dual ARB
-        /// trigger into a machine representation.
-        let private externalConnectorString = function
-            | ArbBnc -> "EPT1"
-            | ArbAux -> "EPT2"
-
-        /// Convert a machine representation of the physical location of an external dual ARB
-        /// trigger into an internal representation.
-        let private parseExternalConnector str =
-            match String.toUpper str with
-            | "EPT1" | "EPTRIGGER1" -> ArbBnc
-            | "EPT2" | "EPTRIGGER2" -> ArbAux
-            | _ -> raise << UnexpectedReplyException
-                   <| sprintf "Unexpected ARB external trigger source location string: %s" str
-
-        /// Set the type of the ARB trigger to the given type.
-        let private setModeType = IO.setValueString modeTypeString modeTypeKey
-
-        /// Set the mode of the dual ARB continuous trigger.
-        let private setContinuousMode = IO.setValueString continuousModeString continuousModeKey
-
-        /// Set the number of repeats per point in the dual ARB single trigger mode.
-        let private setSingleRepeats = IO.setUint16 singleRepeatsKey
-
-        /// Set the retrigger mode of the single trigger setting of the dual ARB.
-        let private setRetriggerMode = IO.setValueString retriggerModeString retriggerModeKey
-
-        /// Set the polarity of the gating trigger in the dual ARB system.
-        let private setGatePolarity = IO.setLowHighState gatePolarityKey
-
-        /// Set the mode of the segment advance trigger of the dual ARB system.
-        let private setSegmentAdvanceMode =
-            IO.setValueString segmentAdvanceModeString segmentAdvanceModeKey
-
         /// Set the dual ARB trigger mode to have the value given.
-        let internal setMode instrument mode = async {
-            do! setModeType instrument mode
+        let internal setMode mode instrument = async {
+            do! IO.set<ArbTriggerMode> modeTypeKey mode instrument
             match mode with
-            | ArbContinuous mode'     -> do! setContinuousMode instrument mode'
+            | ArbContinuous mode'     -> do! IO.set<ArbContinuousMode> continuousModeKey mode' instrument
             | ArbSingle (reps, retrigger) ->
-                do! setSingleRepeats instrument reps
-                do! setRetriggerMode instrument retrigger
-            | ArbGate polarity        -> do! setGatePolarity instrument polarity
-            | ArbSegmentAdvance mode' -> do! setSegmentAdvanceMode instrument mode' }
+                do! IO.set<uint16> singleRepeatsKey reps instrument
+                do! IO.set<ArbRetriggerMode> retriggerModeKey retrigger instrument
+            | ArbGate polarity        -> do! IO.set<LowHighState> gatePolarityKey polarity instrument
+            | ArbSegmentAdvance mode' -> do! IO.set<ArbSegmentAdvanceMode> segmentAdvanceModeKey mode' instrument }
 
         /// Query the currently set value of the dual ARB system triggering.
         let private queryMode instrument = async {
             let helper str =
                 match String.toUpper str with
                     | "CONT" | "CONTINUOUS" ->
-                        IO.queryKeyString parseContinuousMode continuousModeKey instrument
+                        IO.query Parse.arbContinuousMode continuousModeKey instrument
                         |> Async.map ArbContinuous
                     | "SING" | "SINGLE" ->
-                        let reps = IO.queryUint16 singleRepeatsKey instrument
-                        let retrigger = IO.queryKeyString parseRetriggerMode retriggerModeKey instrument
+                        let reps = IO.query uint16 singleRepeatsKey instrument
+                        let retrigger = IO.query Parse.arbRetriggerMode retriggerModeKey instrument
                         Async.map2 (fun a b -> ArbSingle (a, b)) reps retrigger
                     | "GATE" ->
-                        IO.queryLowHighState gatePolarityKey instrument
+                        IO.query Parse.lowHighState gatePolarityKey instrument
                         |> Async.map ArbGate
                     | "SADV" | "SADVANCE" ->
-                        IO.queryKeyString parseSegmentAdvanceMode segmentAdvanceModeKey instrument
+                        IO.query Parse.arbSegmentAdvanceMode segmentAdvanceModeKey instrument
                         |> Async.map ArbSegmentAdvance
                     | str -> raise << UnexpectedReplyException
                              <| sprintf "Unexpected ARB trigger type string: %s" str
-            let! triggerType = IO.queryKeyString (fun str -> str) modeTypeKey instrument
+            let! triggerType = IO.query id modeTypeKey instrument
             return! helper triggerType }
 
-        /// Set the type of the source of the dual ARB triggering system.
-        let private setSourceType =
-            IO.setValueString sourceTypeString sourceTypeKey
-
-        /// Set the physical location of the external trigger for the dual ARB system.
-        let private setSourceConnector =
-            IO.setValueString externalConnectorString sourceLocationKey
-
         /// Set the polarity of the dual ARB external trigger source.
-        let private setSourcePolarity instrument polarity = async {
+        let private setSourcePolarity polarity instrument = async {
             match polarity with
-            | Some p -> do! IO.setPolarity polarityKey instrument p
+            | Some p -> do! IO.set<Polarity> polarityKey p instrument
             | None -> () }
 
         /// Set the delay of the dual ARB trigger system for external trigges.
-        let private setSourceDelay instrument delay = async {
+        let private setSourceDelay delay instrument = async {
             match delay with
             | Some d ->
-                do! IO.setDuration delayKey instrument d
-                do! IO.setOnOffState delayStateKey instrument On
+                do! IO.set<Duration> delayKey d instrument
+                do! IO.set<OnOffState> delayStateKey On instrument
             | None ->
-                do! IO.setOnOffState delayStateKey instrument Off }
+                do! IO.set<OnOffState> delayStateKey Off instrument }
 
         /// Set the dual ARB trigger source.
-        let internal setSource instrument src = async {
+        let internal setSource src instrument = async {
             match src with
             | Some source ->
-                do! setSourceType instrument source
+                do! IO.set<ArbTriggerSource> sourceTypeKey source instrument
                 match source with
                 | ArbExternal (connector, polarity, delay) ->
-                    do! setSourceConnector instrument connector
-                    do! setSourcePolarity instrument polarity
-                    do! setSourceDelay instrument delay
+                    do! IO.set<ArbExternalConnector> sourceLocationKey connector instrument
+                    do! setSourcePolarity polarity instrument
+                    do! setSourceDelay delay instrument
                 | _ -> ()
             | None -> () }
 
         /// Query the source of the dual ARB's triggering system.
-        let private querySource instrument mode = async {
-            let! sourceType = IO.queryKeyString (fun str -> str) sourceTypeKey instrument
+        let private querySource mode instrument = async {
+            let! sourceType = IO.query id sourceTypeKey instrument
             match String.toUpper sourceType with
             | "KEY" -> return Some ArbKey
             | "BUS" -> return Some ArbBus
             | "EXT" ->
-                let! connector = IO.queryKeyString parseExternalConnector sourceLocationKey instrument
+                let! connector = IO.query Parse.arbExternalConnector sourceLocationKey instrument
                 let! polarity =
                     match mode with
                     | ArbGate _ -> async { return None }
-                    | _ -> Async.map Some <| IO.queryPolarity polarityKey instrument
-                let! state = IO.queryOnOffState delayStateKey instrument
+                    | _ -> Async.map Some <| IO.query Parse.polarity polarityKey instrument
+                let! state = IO.query Parse.onOffState delayStateKey instrument
                 let! delay =
                     match state with
-                    | On -> Async.map Some <| IO.queryDuration delayKey instrument
+                    | On -> Async.map Some <| IO.query Parse.duration delayKey instrument
                     | Off -> async { return None }
                 return Some <| ArbExternal (connector, polarity, delay)
             | _ -> return raise << UnexpectedReplyException <| sprintf "Unexpected ARB trigger source string: %s" sourceType }
 
         /// Completely set the dual ARB system's trigger.
-        let set instrument (ArbTrigger (mode, source)) = async {
-            do! setMode instrument mode
-            do! setSource instrument source }
+        let set (ArbTrigger (mode, source)) instrument = async {
+            do! setMode mode instrument
+            do! setSource source instrument }
 
         /// Query the complete settings of the dual ARB's current trigger.
         let query instrument = async {
             let! mode = queryMode instrument
-            let! source = querySource instrument mode
+            let! source = querySource mode instrument
             return ArbTrigger (mode, source) }
 
     module internal Encode =
@@ -368,7 +264,7 @@ module ARB =
             let singleIq = Array.create 4 0uy
             let mutable singleMarkers = 0uy
             for i in 0 .. (sampleCount - 1) do
-                let (sample, SampleCount count) = segment.SegmentSamples.[sampleIndex]
+                let (sample, count) = segment.SegmentSamples.[sampleIndex]
                 if used = 0u then
                     singleIq.[0 .. 3] <- Sample.iqBytes sample
                     singleMarkers     <- Markers.toByte (Sample.markers sample)
@@ -386,19 +282,6 @@ module ARB =
             { EncodedIQ = iq
               EncodedMarkers = markers }
 
-        /// Make the data string, including the '#' character, the digits of length, the length
-        /// and the data.
-        let private dataString (data : byte []) =
-            let length = data.Length
-            let digits = length.ToString().Length
-            if digits >= 10 then
-                invalidArg "Data string size" "Can't write 1GB in one go!"
-            Array.concat [
-                "#"B
-                Text.Encoding.ASCII.GetBytes(digits.ToString())
-                Text.Encoding.ASCII.GetBytes(length.ToString())
-                data ]
-
         /// Build up a full string for data storage and location.
         let private dataStorageString (fileName : string) dataString =
             Array.concat [System.Text.Encoding.ASCII.GetBytes fileName; ","B; dataString]
@@ -409,10 +292,10 @@ module ARB =
         /// set by SCPI commands.
         let segment id segment =
             let encodedSegment = toEncodedSegment segment
-            let waveformFilename = waveformFileString id
-            let markerFilename   = markerFileString   id
-            let waveformDataString = dataString encodedSegment.EncodedIQ
-            let markerDataString   = dataString encodedSegment.EncodedMarkers
+            let waveformFilename = Filename.waveform id
+            let markerFilename   = Filename.marker   id
+            let waveformDataString = SCPI.datablock encodedSegment.EncodedIQ
+            let markerDataString   = SCPI.datablock encodedSegment.EncodedMarkers
             { Waveform = dataStorageString  waveformFilename waveformDataString
               Markers  = dataStorageString  markerFilename   markerDataString }
 
@@ -421,25 +304,20 @@ module ARB =
         /// Get the whole string necessary to write a marker file to the machine.
         let markersDataString (encoded : EncodedSegmentFiles) = encoded.Markers
 
-        /// Make a sequence element into a tuple of the byte array of the full filename
-        /// and the ASCII representation of the number of repetitions.
-        let private asciiSequenceElement (el, reps) =
-            (asciiString <| waveformIdFilename el, asciiString reps)
-
         /// Encode a sequence element into the form "\"<filename>\",<reps>,<markers>"B.
         let private toEncodedSequenceElement (element : SequenceElement) =
-            sprintf "%s,%u,ALL" (waveformIdFilename <| fst element) (snd element)
+            sprintf "%s,%u,ALL" (SCPI.format <| fst element) (snd element)
 
         /// Convert a sequence into an ASCII string of its elements.
         let internal sequenceData (SequenceType sequence) =
             sequence
             |> List.map toEncodedSequenceElement
-            |> List.map (sprintf ",%s")
-            |> String.concat ""
+            |> String.concat ","
+            |> sprintf ",%s"
 
         /// Encode a whole sequence in an EncodedSequence.
         let sequence id sequence =
-            sprintf "%s%s" (sequenceFileString id) (sequenceData sequence)
+            sprintf "%s%s" (Filename.sequence id) (sequenceData sequence)
 
     module internal Decode =
         /// Convert a big-endian array of bytes into the host order.
@@ -514,7 +392,7 @@ module ARB =
                 (Convert.ToInt32 sample.SampleMarkers.M4)
 
         /// Print out a (Sample * SampleCount) tuple.
-        let printSampleCount indent (smp, SampleCount count) =
+        let printSampleCount indent (smp, count) =
             printSample indent smp
             printfn " * %d" count
 

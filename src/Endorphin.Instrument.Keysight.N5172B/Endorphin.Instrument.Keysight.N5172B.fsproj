@@ -74,7 +74,8 @@
     </Compile>
     <Compile Include="Model.fs" />
     <Compile Include="InternalModel.fs" />
-    <Compile Include="Parsing.fs" />
+    <Compile Include="Parse.fs" />
+    <Compile Include="Filename.fs" />
     <Compile Include="Hash.fs" />
     <Compile Include="IO.fs" />
     <Compile Include="Basic.fs" />

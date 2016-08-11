@@ -4,7 +4,7 @@
 
 #r "Endorphin.Core/lib/net452/Endorphin.Core.dll"
 #r "Endorphin.Core.NationalInstruments/lib/net452/Endorphin.Core.NationalInstruments.dll"
-#r "bin/Release/Endorphin.Instrument.Keysight.N5172B.dll"
+#r "bin/Debug/Endorphin.Instrument.Keysight.N5172B.dll"
 
 // This stuff is very "low-level" for creation - in general I'd expect you probably won't need this,
 // it's just here for completeness.  This demonstrates direct creation of markers, samples, segments
@@ -73,23 +73,23 @@ let sequence2 =
     |> Sequence.toWaveform
 
 async {
-    // open the keysight box
-    let! keysight = RfSource.openInstrument "TCPIP0::192.168.1.2" 10000<ms>
+    // open the box keysight
+    let! keysight = IO.connect "TCPIP0::192.168.1.2" 10000<ms>
 
     // store the two segments we created
-    let! storedSegment1 = Control.Waveform.store keysight segment1
-    let! storedSegment2 = Control.Waveform.store keysight segment2
+    let! storedSegment1 = Control.Waveform.store segment1 keysight
+    let! storedSegment2 = Control.Waveform.store segment2 keysight
 
     // stored the two sequences we created - there is no dependency management, so it all must
     // be done by us (i.e. store the segments yourself!)
-    let! storedSequence1 = Control.Waveform.store keysight sequence1
-    let! storedSequence2 = Control.Waveform.store keysight sequence2
+    let! storedSequence1 = Control.Waveform.store sequence1 keysight
+    let! storedSequence2 = Control.Waveform.store sequence2 keysight
 
     // begin playback on a stored waveform
-    do! Control.Waveform.playStored keysight storedSequence1
+    do! Control.Waveform.playStored storedSequence1 keysight
 
     // delete a single waveform file
-    do! Control.Waveform.delete keysight storedSegment2
+    do! Control.Waveform.delete storedSegment2 keysight
 
     // delete all stored segments from the volatile memory of the machine
     do! Control.Waveform.Segment.deleteAll keysight
@@ -101,5 +101,5 @@ async {
     do! Control.Waveform.deleteAll keysight
 
     // close the instrument, because we're done
-    do! RfSource.closeInstrument keysight }
+    do! IO.disconnect keysight }
 |> Async.RunSynchronously

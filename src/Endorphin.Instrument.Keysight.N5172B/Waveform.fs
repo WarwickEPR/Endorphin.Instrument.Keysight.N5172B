@@ -137,7 +137,7 @@ module Segment =
         let length = segment.SegmentSamples.Length
         let arr = Array.create (length * 9) 0uy // 5 bytes per sample, 4 bytes per count
         for i in 0 .. length - 1 do
-            let (sample, SampleCount reps) = segment.SegmentSamples.[i]
+            let (sample, reps) = segment.SegmentSamples.[i]
             arr.[(i * 9) + 0 .. (i * 9) + 4] <- Sample.toBytes sample
             arr.[(i * 9) + 5 .. (i * 9) + 8] <- BitConverter.GetBytes reps
             // endianness doesn't matter here
@@ -151,14 +151,14 @@ module Segment =
 
     /// Add a sample and a number of repeats to a waveform.
     let add sample count segment = {
-        SegmentSamples = Array.append (samples segment) [| (sample, SampleCount <| uint32 count) |]
+        SegmentSamples = Array.append (samples segment) [| (sample, uint32 count) |]
         SegmentLength  = length segment + count }
 
     /// Add a sequence of (sample, count) onto a segment.
     let addSeq sequence segment = {
         SegmentSamples =
             sequence
-            |> Seq.map (fun (x, y) -> (x, SampleCount y))
+            |> Seq.map (fun (x, y) -> (x, y))
             |> Array.ofSeq
             |> Array.append (samples segment)
         SegmentLength =
@@ -189,7 +189,7 @@ module Sequence =
     let private toBytes sequence =
         sequence
         |> waveforms
-        |> List.map (fun (id, reps) -> sprintf "%s%d" (waveformIdString id) reps)
+        |> List.map (fun (id, reps) -> sprintf "%s%d" (Filename.waveformId id) reps)
         |> String.concat ""
         |> System.Text.Encoding.ASCII.GetBytes
 

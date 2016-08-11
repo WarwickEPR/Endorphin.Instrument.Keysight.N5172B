@@ -8,6 +8,6 @@ module Power =
         /// Command reference p.77.
         let private alcKey = ":POWER:ALC"
         /// Set the state of the ALC circuitry.
-        let setAlcState = IO.setOnOffState alcKey
+        let setAlcState = fun x -> IO.set<OnOffState> alcKey x
         /// Query the state of the ALC circuitry.
-        let queryAlcState = IO.queryOnOffState alcKey
+        let queryAlcState = fun x -> IO.query Parse.onOffState alcKey x
