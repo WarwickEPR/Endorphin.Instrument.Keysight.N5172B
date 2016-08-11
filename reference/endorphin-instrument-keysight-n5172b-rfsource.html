@@ -57,51 +57,11 @@ Organised by subsystem mirroring the Keysight configuration.</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '99', 99)" onmouseover="showTip(event, '99', 99)">
-            applySettings rfSource settings
+          <code onmouseout="hideTip(event, '112', 112)" onmouseover="showTip(event, '112', 112)">
+            applySettings settings instrument
           </code>
-          <div class="tip" id="99">
-            <strong>Signature:</strong> rfSource:RfSource -&gt; settings:KeysightRfSettings -&gt; Async&lt;unit&gt;<br />
-                      </div>
-        </td>
-        <td class="xmldoc">
-            <a href="http://github.com/anton-pt/Endorphin.Core/tree/master/src/Endorphin.Instrument.Keysight.N5172B/RfSource.fs#L18-18" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          <p>Apply a set of settings to the given RfSource machine.</p>
-
-
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '100', 100)" onmouseover="showTip(event, '100', 100)">
-            closeInstrument 
-          </code>
-          <div class="tip" id="100">
-            <strong>Signature:</strong> RfSource -&gt; Async&lt;unit&gt;<br />
-                      </div>
-        </td>
-        <td class="xmldoc">
-            <a href="http://github.com/anton-pt/Endorphin.Core/tree/master/src/Endorphin.Instrument.Keysight.N5172B/RfSource.fs#L12-12" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          <p>Close an RfSource instrument.</p>
-
-
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '101', 101)" onmouseover="showTip(event, '101', 101)">
-            openInstrument 
-          </code>
-          <div class="tip" id="101">
-            <strong>Signature:</strong> string -&gt; int&lt;MeasureProduct&lt;ms,MeasureOne&gt;&gt; -&gt; Async&lt;RfSource&gt;<br />
+          <div class="tip" id="112">
+            <strong>Signature:</strong> settings:KeysightRfSettings -&gt; instrument:IScpiInstrument -&gt; Async&lt;unit&gt;<br />
                       </div>
         </td>
         <td class="xmldoc">
@@ -109,28 +69,7 @@ Organised by subsystem mirroring the Keysight configuration.</p>
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          <p>Open an RfSource given a VISA address and timeout in milliseconds.</p>
-
-
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '102', 102)" onmouseover="showTip(event, '102', 102)">
-            queryIdentity 
-          </code>
-          <div class="tip" id="102">
-            <strong>Signature:</strong> RfSource -&gt; Async&lt;DeviceId&gt;<br />
-                      </div>
-        </td>
-        <td class="xmldoc">
-            <a href="http://github.com/anton-pt/Endorphin.Core/tree/master/src/Endorphin.Instrument.Keysight.N5172B/RfSource.fs#L15-15" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          <p>Query the identity of an RfSource, and match the returned string against ones known
-to the program.</p>
+          <p>Apply a set of settings to the given RfSource machine.</p>
 
 
         </td>

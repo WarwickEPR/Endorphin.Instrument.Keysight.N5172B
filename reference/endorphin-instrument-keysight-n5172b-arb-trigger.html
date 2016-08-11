@@ -181,11 +181,11 @@ Also needs a trigger source to be set.</p>
             query instrument
           </code>
           <div class="tip" id="14">
-            <strong>Signature:</strong> instrument:RfSource -&gt; Async&lt;ArbTrigger&gt;<br />
+            <strong>Signature:</strong> instrument:IScpiInstrument -&gt; Async&lt;ArbTrigger&gt;<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/anton-pt/Endorphin.Core/tree/master/src/Endorphin.Instrument.Keysight.N5172B/ARB.fs#L355-355" class="github-link">
+            <a href="http://github.com/anton-pt/Endorphin.Core/tree/master/src/Endorphin.Instrument.Keysight.N5172B/ARB.fs#L251-251" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -220,14 +220,14 @@ Also needs a trigger source to be set.</p>
         <td class="member-name">
 
           <code onmouseout="hideTip(event, '16', 16)" onmouseover="showTip(event, '16', 16)">
-            set instrument arg2
+            set arg1 instrument
           </code>
           <div class="tip" id="16">
-            <strong>Signature:</strong> instrument:RfSource -&gt; ArbTrigger -&gt; Async&lt;unit&gt;<br />
+            <strong>Signature:</strong> ArbTrigger -&gt; instrument:IScpiInstrument -&gt; Async&lt;unit&gt;<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/anton-pt/Endorphin.Core/tree/master/src/Endorphin.Instrument.Keysight.N5172B/ARB.fs#L350-350" class="github-link">
+            <a href="http://github.com/anton-pt/Endorphin.Core/tree/master/src/Endorphin.Instrument.Keysight.N5172B/ARB.fs#L246-246" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>

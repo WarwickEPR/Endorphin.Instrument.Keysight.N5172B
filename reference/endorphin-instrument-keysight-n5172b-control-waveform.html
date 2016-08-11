@@ -86,14 +86,14 @@ generic type.  This is where the waveform abstraction fails for speed or space r
         <td class="member-name">
 
           <code onmouseout="hideTip(event, '32', 32)" onmouseover="showTip(event, '32', 32)">
-            delete 
+            delete x
           </code>
           <div class="tip" id="32">
-            <strong>Signature:</strong> RfSource -&gt; StoredWaveform -&gt; Async&lt;unit&gt;<br />
+            <strong>Signature:</strong> x:StoredWaveform -&gt; IScpiInstrument -&gt; Async&lt;unit&gt;<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/anton-pt/Endorphin.Core/tree/master/src/Endorphin.Instrument.Keysight.N5172B/Control.fs#L199-199" class="github-link">
+            <a href="http://github.com/anton-pt/Endorphin.Core/tree/master/src/Endorphin.Instrument.Keysight.N5172B/Control.fs#L147-147" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -110,11 +110,11 @@ file, the markers file and the headers file (if present).</p>
             deleteAll instrument
           </code>
           <div class="tip" id="33">
-            <strong>Signature:</strong> instrument:RfSource -&gt; Async&lt;unit&gt;<br />
+            <strong>Signature:</strong> instrument:IScpiInstrument -&gt; Async&lt;unit&gt;<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/anton-pt/Endorphin.Core/tree/master/src/Endorphin.Instrument.Keysight.N5172B/Control.fs#L201-201" class="github-link">
+            <a href="http://github.com/anton-pt/Endorphin.Core/tree/master/src/Endorphin.Instrument.Keysight.N5172B/Control.fs#L149-149" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -127,14 +127,14 @@ file, the markers file and the headers file (if present).</p>
         <td class="member-name">
 
           <code onmouseout="hideTip(event, '34', 34)" onmouseover="showTip(event, '34', 34)">
-            play instrument waveform
+            play waveform instrument
           </code>
           <div class="tip" id="34">
-            <strong>Signature:</strong> instrument:RfSource -&gt; waveform:Waveform -&gt; Async&lt;StoredWaveform&gt;<br />
+            <strong>Signature:</strong> waveform:Waveform -&gt; instrument:IScpiInstrument -&gt; Async&lt;StoredWaveform&gt;<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/anton-pt/Endorphin.Core/tree/master/src/Endorphin.Instrument.Keysight.N5172B/Control.fs#L211-211" class="github-link">
+            <a href="http://github.com/anton-pt/Endorphin.Core/tree/master/src/Endorphin.Instrument.Keysight.N5172B/Control.fs#L159-159" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -147,14 +147,14 @@ file, the markers file and the headers file (if present).</p>
         <td class="member-name">
 
           <code onmouseout="hideTip(event, '35', 35)" onmouseover="showTip(event, '35', 35)">
-            playStored instrument stored
+            playStored stored instrument
           </code>
           <div class="tip" id="35">
-            <strong>Signature:</strong> instrument:RfSource -&gt; stored:StoredWaveform -&gt; Async&lt;unit&gt;<br />
+            <strong>Signature:</strong> stored:StoredWaveform -&gt; instrument:IScpiInstrument -&gt; Async&lt;unit&gt;<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/anton-pt/Endorphin.Core/tree/master/src/Endorphin.Instrument.Keysight.N5172B/Control.fs#L206-206" class="github-link">
+            <a href="http://github.com/anton-pt/Endorphin.Core/tree/master/src/Endorphin.Instrument.Keysight.N5172B/Control.fs#L154-154" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -167,14 +167,14 @@ file, the markers file and the headers file (if present).</p>
         <td class="member-name">
 
           <code onmouseout="hideTip(event, '36', 36)" onmouseover="showTip(event, '36', 36)">
-            select 
+            select x
           </code>
           <div class="tip" id="36">
-            <strong>Signature:</strong> RfSource -&gt; StoredWaveform -&gt; Async&lt;unit&gt;<br />
+            <strong>Signature:</strong> x:StoredWaveform -&gt; IScpiInstrument -&gt; Async&lt;unit&gt;<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/anton-pt/Endorphin.Core/tree/master/src/Endorphin.Instrument.Keysight.N5172B/Control.fs#L45-45" class="github-link">
+            <a href="http://github.com/anton-pt/Endorphin.Core/tree/master/src/Endorphin.Instrument.Keysight.N5172B/Control.fs#L22-22" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -187,14 +187,14 @@ file, the markers file and the headers file (if present).</p>
         <td class="member-name">
 
           <code onmouseout="hideTip(event, '37', 37)" onmouseover="showTip(event, '37', 37)">
-            store instrument _arg1
+            store waveform instrument
           </code>
           <div class="tip" id="37">
-            <strong>Signature:</strong> instrument:RfSource -&gt; _arg1:Waveform -&gt; Async&lt;StoredWaveform&gt;<br />
+            <strong>Signature:</strong> waveform:Waveform -&gt; instrument:IScpiInstrument -&gt; Async&lt;StoredWaveform&gt;<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/anton-pt/Endorphin.Core/tree/master/src/Endorphin.Instrument.Keysight.N5172B/Control.fs#L179-179" class="github-link">
+            <a href="http://github.com/anton-pt/Endorphin.Core/tree/master/src/Endorphin.Instrument.Keysight.N5172B/Control.fs#L126-126" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -210,11 +210,11 @@ file, the markers file and the headers file (if present).</p>
             storeSeq instrument sequence
           </code>
           <div class="tip" id="38">
-            <strong>Signature:</strong> instrument:RfSource -&gt; sequence:seq&lt;Waveform&gt; -&gt; Async&lt;StoredWaveform []&gt;<br />
+            <strong>Signature:</strong> instrument:IScpiInstrument -&gt; sequence:seq&lt;Waveform&gt; -&gt; Async&lt;StoredWaveform []&gt;<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/anton-pt/Endorphin.Core/tree/master/src/Endorphin.Instrument.Keysight.N5172B/Control.fs#L184-184" class="github-link">
+            <a href="http://github.com/anton-pt/Endorphin.Core/tree/master/src/Endorphin.Instrument.Keysight.N5172B/Control.fs#L132-132" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
