@@ -89,7 +89,7 @@ generic type.  This is where the waveform abstraction fails for speed or space r
             delete x
           </code>
           <div class="tip" id="32">
-            <strong>Signature:</strong> x:StoredWaveform -&gt; IScpiInstrument -&gt; Async&lt;unit&gt;<br />
+            <strong>Signature:</strong> x:StoredWaveform -&gt; RfSource -&gt; Async&lt;unit&gt;<br />
                       </div>
         </td>
         <td class="xmldoc">
@@ -110,7 +110,7 @@ file, the markers file and the headers file (if present).</p>
             deleteAll instrument
           </code>
           <div class="tip" id="33">
-            <strong>Signature:</strong> instrument:IScpiInstrument -&gt; Async&lt;unit&gt;<br />
+            <strong>Signature:</strong> instrument:RfSource -&gt; Async&lt;unit&gt;<br />
                       </div>
         </td>
         <td class="xmldoc">
@@ -130,7 +130,7 @@ file, the markers file and the headers file (if present).</p>
             play waveform instrument
           </code>
           <div class="tip" id="34">
-            <strong>Signature:</strong> waveform:Waveform -&gt; instrument:IScpiInstrument -&gt; Async&lt;StoredWaveform&gt;<br />
+            <strong>Signature:</strong> waveform:Waveform -&gt; instrument:RfSource -&gt; Async&lt;StoredWaveform&gt;<br />
                       </div>
         </td>
         <td class="xmldoc">
@@ -150,7 +150,7 @@ file, the markers file and the headers file (if present).</p>
             playStored stored instrument
           </code>
           <div class="tip" id="35">
-            <strong>Signature:</strong> stored:StoredWaveform -&gt; instrument:IScpiInstrument -&gt; Async&lt;unit&gt;<br />
+            <strong>Signature:</strong> stored:StoredWaveform -&gt; instrument:RfSource -&gt; Async&lt;unit&gt;<br />
                       </div>
         </td>
         <td class="xmldoc">
@@ -170,7 +170,7 @@ file, the markers file and the headers file (if present).</p>
             select x
           </code>
           <div class="tip" id="36">
-            <strong>Signature:</strong> x:StoredWaveform -&gt; IScpiInstrument -&gt; Async&lt;unit&gt;<br />
+            <strong>Signature:</strong> x:StoredWaveform -&gt; RfSource -&gt; Async&lt;unit&gt;<br />
                       </div>
         </td>
         <td class="xmldoc">
@@ -190,7 +190,7 @@ file, the markers file and the headers file (if present).</p>
             store waveform instrument
           </code>
           <div class="tip" id="37">
-            <strong>Signature:</strong> waveform:Waveform -&gt; instrument:IScpiInstrument -&gt; Async&lt;StoredWaveform&gt;<br />
+            <strong>Signature:</strong> waveform:Waveform -&gt; instrument:RfSource -&gt; Async&lt;StoredWaveform&gt;<br />
                       </div>
         </td>
         <td class="xmldoc">
@@ -210,7 +210,7 @@ file, the markers file and the headers file (if present).</p>
             storeSeq instrument sequence
           </code>
           <div class="tip" id="38">
-            <strong>Signature:</strong> instrument:IScpiInstrument -&gt; sequence:seq&lt;Waveform&gt; -&gt; Async&lt;StoredWaveform []&gt;<br />
+            <strong>Signature:</strong> instrument:RfSource -&gt; sequence:seq&lt;Waveform&gt; -&gt; Async&lt;StoredWaveform []&gt;<br />
                       </div>
         </td>
         <td class="xmldoc">
