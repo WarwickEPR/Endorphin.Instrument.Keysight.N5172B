@@ -10,6 +10,9 @@ exception UnexpectedReplyException of string
 /// Model of the possible configurations of a Keysight RF source.
 [<AutoOpen>]
 module Model =
+
+    type RfSource = internal RfSource of SCPI.IScpiInstrument
+
     [<AutoOpen>]
     module Quantities =
         /// An absolute amplitude of a signal, given as a float type with units of dBm.

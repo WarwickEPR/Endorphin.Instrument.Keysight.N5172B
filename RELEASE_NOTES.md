@@ -1,3 +1,7 @@
+#### 0.3.1 - 2016-09-26
+* Return type-hiding so experiments can tell what kind of SCPI instrument this is
+* Add a method to access the SCPI instrument
+
 #### 0.3.0 - 2016-08-11
 * Move to Endorphin.Core.SCPI-based IO, and remove type-hiding on the instrument
   so commands may be sent manually.

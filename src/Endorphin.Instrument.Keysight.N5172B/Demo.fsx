@@ -19,7 +19,6 @@ let pi = System.Math.PI
 let fun2 = internalGeneralSourceInHz 1.0e5<Hz> (Ramp Positive) (pi*0.5<rad>)
 let fun3 = internalGeneralSourceInHz 1.0e5<Hz> (Ramp Positive) (degreesToRadians 90.0<deg>)
 
-
 let functionSource frequency = InternalSource ( Function1,
                                                 { Shape = Sine
                                                   Frequency = frequency
@@ -37,7 +36,7 @@ let sweepExperiment startFrequency stopFrequency =
     async {
         let! keysight = IO.connect "TCPIP0::192.168.1.2" 3000<ms>
         //let keysight = Dummy.openDumbInstrument
-        let! identity = SCPI.Query.identity keysight
+        let! identity = SCPI.Query.identity (IO.scpiInstrument keysight)
         printf "%A" identity
 
         let sweepSettings =

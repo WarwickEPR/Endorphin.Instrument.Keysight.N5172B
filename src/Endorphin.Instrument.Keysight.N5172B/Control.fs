@@ -37,15 +37,15 @@ module Control =
             /// Store the three files associated with any segment in the machine's volatile memory,
             /// using the filename given as the id. Returns a StoredSegment type representing the
             /// data stored.
-            let internal store (id, segment) instrument = async {
+            let internal store (id, segment) rfSource = async {
                 let encoded = ARB.Encode.segment id segment
                 let commands =
                     SCPI.String.concat [
                         SCPI.String.Set.value storeDataKey (ARB.Encode.waveformDataString encoded)
                         SCPI.String.Set.value storeDataKey (ARB.Encode.markersDataString  encoded) ]
-                do! SCPI.Checked.Set.verbatim commands instrument
+                do! SCPI.Checked.Set.verbatim commands (IO.scpiInstrument rfSource)
                 let stored = idToStoredWaveform id
-                do! setHeaderArbClockFrequency ARB.defaultClockFrequency stored instrument
+                do! setHeaderArbClockFrequency ARB.defaultClockFrequency stored rfSource
                 return stored }
 
             /// Store a sequence of segments and their ids into the volatile memory of the machine.
