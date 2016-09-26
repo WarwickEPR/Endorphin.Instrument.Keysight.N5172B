@@ -50,7 +50,8 @@ module IO =
         let! unit = query string powerUnitKey rfSource
         do! set powerUnitKey "DBM" rfSource
         let! result = query parser key rfSource
-        do! set powerUnitKey unit rfSource }
+        do! set powerUnitKey unit rfSource
+        return result }
 
     /// Safely query an amplitude from the machine, setting the power units to be
     /// in the correct format before, and returning them to their previous settings

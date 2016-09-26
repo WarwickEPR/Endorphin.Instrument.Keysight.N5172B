@@ -1,3 +1,7 @@
+#### 0.3.2 - 2016-09-26
+* Correct query amplitude to return a value
+* Expose open/close through RfSource
+
 #### 0.3.1 - 2016-09-26
 * Return type-hiding so experiments can tell what kind of SCPI instrument this is
 * Add a method to access the SCPI instrument

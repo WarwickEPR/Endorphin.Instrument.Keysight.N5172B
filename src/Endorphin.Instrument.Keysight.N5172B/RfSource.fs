@@ -15,3 +15,9 @@ module RfSource =
         | StepSweep sweep ->
             do! Sweep.Apply.stepSweep sweep instrument
         do! Modulation.Apply.modulationSettings settings.Modulation instrument }
+
+    /// Connect to instrument via TCPIP
+    let openInstrument = IO.connect
+
+    /// Disconnect from instrument
+    let closeInstrument = IO.disconnect
