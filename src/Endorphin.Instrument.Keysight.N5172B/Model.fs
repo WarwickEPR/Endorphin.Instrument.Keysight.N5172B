@@ -7,11 +7,11 @@ open Microsoft.FSharp.Data.UnitSystems.SI.UnitSymbols
 
 exception UnexpectedReplyException of string
 
+type RfSource = internal RfSource of SCPI.IScpiInstrument
+
 /// Model of the possible configurations of a Keysight RF source.
 [<AutoOpen>]
 module Model =
-
-    type RfSource = internal RfSource of SCPI.IScpiInstrument
 
     [<AutoOpen>]
     module Quantities =

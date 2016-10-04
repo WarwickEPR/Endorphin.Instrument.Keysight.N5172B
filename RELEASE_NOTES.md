@@ -1,3 +1,6 @@
+#### 0.3.3 - 2016-10-04
+* Rename instrument level function module and auto-open. Use namespace to discriminate
+
 #### 0.3.2 - 2016-09-26
 * Correct query amplitude to return a value
 * Expose open/close through RfSource
