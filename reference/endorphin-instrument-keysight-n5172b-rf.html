@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>Control - Endorphin.Core</title>
+    <title>Rf - Endorphin.Core</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content=""/>
     <meta name="author" content="University of Warwick EPR and Diamond group"/>
@@ -35,12 +35,15 @@
 
 
 
-<h1>Control</h1>
+<h1>Rf</h1>
 <p>
   <span>Namespace: Endorphin.Instrument.Keysight.N5172B</span><br />
-  <span>Parent Module: <a href="endorphin-instrument-keysight-n5172b-power.html">Power</a></span>
 </p>
 <div class="xmldoc">
+<p>Command set of the Keysight RF instrument.
+Implements functions to modify &amp; query configuration.
+Organised by subsystem mirroring the Keysight configuration.</p>
+
 </div>
 
 <!-- Render nested types and modules, if there are any -->
@@ -54,19 +57,19 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '104', 104)" onmouseover="showTip(event, '104', 104)">
-            queryAlcState x
+          <code onmouseout="hideTip(event, '113', 113)" onmouseover="showTip(event, '113', 113)">
+            applySettings settings instrument
           </code>
-          <div class="tip" id="104">
-            <strong>Signature:</strong> x:RfSource -&gt; Async&lt;OnOffState&gt;<br />
+          <div class="tip" id="113">
+            <strong>Signature:</strong> settings:KeysightRfSettings -&gt; instrument:RfSource -&gt; Async&lt;unit&gt;<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/anton-pt/Endorphin.Core/tree/master/src/Endorphin.Instrument.Keysight.N5172B/Power.fs#L13-13" class="github-link">
+            <a href="http://github.com/anton-pt/Endorphin.Core/tree/master/src/Endorphin.Instrument.Keysight.N5172B/Rf.fs#L10-10" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          <p>Query the state of the ALC circuitry.</p>
+          <p>Apply a set of settings to the given RfSource machine.</p>
 
 
         </td>
@@ -74,19 +77,39 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '105', 105)" onmouseover="showTip(event, '105', 105)">
-            setAlcState x
+          <code onmouseout="hideTip(event, '114', 114)" onmouseover="showTip(event, '114', 114)">
+            closeInstrument 
           </code>
-          <div class="tip" id="105">
-            <strong>Signature:</strong> x:OnOffState -&gt; RfSource -&gt; Async&lt;unit&gt;<br />
+          <div class="tip" id="114">
+            <strong>Signature:</strong> RfSource -&gt; Async&lt;unit&gt;<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/anton-pt/Endorphin.Core/tree/master/src/Endorphin.Instrument.Keysight.N5172B/Power.fs#L11-11" class="github-link">
+            <a href="http://github.com/anton-pt/Endorphin.Core/tree/master/src/Endorphin.Instrument.Keysight.N5172B/Rf.fs#L23-23" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          <p>Set the state of the ALC circuitry.</p>
+          <p>Disconnect from instrument</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '115', 115)" onmouseover="showTip(event, '115', 115)">
+            openInstrument 
+          </code>
+          <div class="tip" id="115">
+            <strong>Signature:</strong> string -&gt; int&lt;MeasureProduct&lt;ms,MeasureOne&gt;&gt; -&gt; Async&lt;RfSource&gt;<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/anton-pt/Endorphin.Core/tree/master/src/Endorphin.Instrument.Keysight.N5172B/Rf.fs#L20-20" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Connect to instrument via TCPIP</p>
 
 
         </td>
