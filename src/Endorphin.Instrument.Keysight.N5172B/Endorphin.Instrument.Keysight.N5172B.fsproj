@@ -90,7 +90,7 @@
     <Compile Include="Experiment.fs" />
     <Compile Include="Routing.fs" />
     <Compile Include="Control.fs" />
-    <Compile Include="Instrument.fs" />
+    <Compile Include="Rf.fs" />
     <None Include="WaveformDemo.fsx" />
     <None Include="SpinEchoDecayDemo.fsx" />
     <None Include="Demo.fsx" />

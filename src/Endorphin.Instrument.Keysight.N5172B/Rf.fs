@@ -5,8 +5,7 @@ namespace Endorphin.Instrument.Keysight.N5172B
 /// Command set of the Keysight RF instrument.
 /// Implements functions to modify & query configuration.
 /// Organised by subsystem mirroring the Keysight configuration.
-[<AutoOpen>]
-module Instrument =
+module Rf =
     /// Apply a set of settings to the given RfSource machine.
     let applySettings  settings instrument = async {
         match settings.Sweep with

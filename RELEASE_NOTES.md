@@ -1,3 +1,6 @@
+#### 0.3.4 - 2016-11-01
+* Expose types needed to access the instrument without namespace collisions
+
 #### 0.3.3 - 2016-10-04
 * Rename instrument level function module and auto-open. Use namespace to discriminate
 
