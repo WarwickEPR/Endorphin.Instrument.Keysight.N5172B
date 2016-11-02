@@ -1,3 +1,6 @@
+#### 0.3.5 - 2016-11-02
+* Correct transposition in model number
+
 #### 0.3.4 - 2016-11-01
 * Expose types needed to access the instrument without namespace collisions
 

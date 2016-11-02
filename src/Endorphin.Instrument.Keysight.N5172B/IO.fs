@@ -14,7 +14,7 @@ module IO =
         // not checked - that's not our job in the initialisation bit
         let! identity = SCPI.Query.identity instrument
         match identity.Model with
-        | "N1572B" -> ()
+        | "N5172B" -> ()
         | model    ->
             sprintf "Unexpected RF source model number: %s." model
             |> UnexpectedReplyException
