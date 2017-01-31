@@ -283,9 +283,10 @@ module Model =
 
         /// The type of sweep to use, either list or step.
         type SweepType = List | Step with
-            member this.ToScpiString () = this |> function
-                 | List -> "LIST"
-                 | Step -> "STEP"
+            interface SCPI.IScpiFormatable with
+                member this.ToScpiString () = this |> function
+                     | List -> "LIST"
+                     | Step -> "STEP"
 
         /// The type of spacing to use between sweep steps, either linear or logarithmic.
         type StepSpacing = LinearStepSpacing | LogarithmicStepSpacing with

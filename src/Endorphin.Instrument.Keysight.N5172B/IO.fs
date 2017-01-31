@@ -9,6 +9,9 @@ open System.Text
 /// Includes functions to access values such as numbers, frequencies etc.,
 /// which are common to different subsystems.
 module IO =
+
+    let logger = log4net.LogManager.GetLogger "Keysight"
+
     /// Check the model number of the instrument matches one that this software is known to work with.
     let private checkModel (N5172B instrument) = async {
         // not checked - that's not our job in the initialisation bit
@@ -24,22 +27,31 @@ module IO =
     let scpiInstrument (N5172B instrument) = instrument
 
     /// Post a key to the instrument, then check the error queue afterwards.
-    let post key (N5172B instrument) = SCPI.Checked.Set.key key instrument
+    let post key (N5172B instrument) =
+        sprintf "Setting key %s" key |> logger.Debug
+        SCPI.Checked.Set.key key instrument
 
     /// Set a key to a value, then check the error queue after.
-    let set<'In> key (value : 'In) (N5172B instrument) = SCPI.Checked.Set.value key value instrument
+    let set<'In> key (value : 'In) (N5172B instrument) =
+        sprintf "Setting %s = %A" key value |> logger.Debug
+        SCPI.Checked.Set.value key value instrument
+
     /// Write a sequency of values
     let setSeq<'In> key (values : seq<'In>) (N5172B instrument) =
+        sprintf "Setting seq %s = %A" key values |> logger.Debug
         SCPI.Checked.Set.value key (String.csvSeqString SCPI.format values) instrument
 
     /// Query a key for a value, then check the error queue after.
     let query (parser : string -> 'Out) key (N5172B instrument) =
+        sprintf "Query %s" key |> logger.Debug
         SCPI.Checked.Query.Key.parsed parser key instrument
     /// Query a key and value for a value, then check the error queue.
     let queryValue<'In, 'Out> (parser : string -> 'Out) key (value : 'In) (N5172B instrument) =
+        sprintf "QueryValue %s %A" key value |> logger.Debug
         SCPI.Checked.Query.Value.parsed parser key value instrument
     /// Query a key for a CSV sequence of values, each of which is interpreted by the parser command.
     let querySeq (parser : string -> 'Out) key (N5172B instrument) =
+        sprintf "QuerySeq %s %A" key |> logger.Debug
         SCPI.Checked.Query.Key.parsed (String.parseCsvSeq parser) key instrument
 
     /// The key for setting the units of power.

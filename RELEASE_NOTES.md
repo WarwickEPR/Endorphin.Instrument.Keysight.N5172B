@@ -1,3 +1,7 @@
+#### 0.3.6 - 2017-01-31
+* Add readable log4net logging at this level
+* Correct SetSweepType serialisation
+
 #### 0.3.5 - 2016-11-02
 * Correct transposition in model number
 
