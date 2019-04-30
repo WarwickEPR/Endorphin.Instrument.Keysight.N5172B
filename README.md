@@ -5,7 +5,7 @@ software control of the Keysight N5172B arbitrary waveform generator.
 
 Documentation:
 http://WarwickEPR.github.io/Endorphin.Instrument.Keysight.N5172B
-More documentation to follow...
+
 
 ## Maintainers
 
